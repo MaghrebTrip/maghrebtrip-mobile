@@ -1,1 +1,1 @@
-# maghrebtrip-mobile
+# Mobile version of MaghrebTrip app
