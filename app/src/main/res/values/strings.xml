@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">MaghrebTrip</string>
+    <string name="welcome">Welcome</string>
+    <string name="username">Ahmed Idrissi</string>
+    <string name="notification_number">1</string>
+    <string name="search_hint">Search anything...</string>
+    <string name="explore">Explore</string>
+    <string name="cat1">Hotels</string>
+    <string name="cat2">Restaurants</string>
+    <string name="cat3">Airports</string>
+    <string name="cat4">Monuments</string>
+    <string name="cat5">Entertainment</string>
+    <string name="cat6">Cities</string>
+</resources>
