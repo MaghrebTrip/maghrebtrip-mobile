@@ -8,8 +8,8 @@ import android.os.Bundle;
 import android.view.Window;
 
 import com.maghrebtrip.R;
-import com.maghrebtrip.adapters.PopularCityAdapter;
-import com.maghrebtrip.cities.PopularCity;
+import com.maghrebtrip.adapters.CityAdapter;
+import com.maghrebtrip.cities.City;
 import com.maghrebtrip.databinding.ActivityMainBinding;
 
 import java.util.ArrayList;
@@ -33,14 +33,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initRecyclerView() {
-        ArrayList<PopularCity> items = new ArrayList<>();
-        items.add(new PopularCity("Rabat","rabat"));
-        items.add(new PopularCity("Casablanca","casablanca"));
-        items.add(new PopularCity("Ifrane","ifrane"));
-        items.add(new PopularCity("Marrakech","marrakech"));
+        ArrayList<City> items = new ArrayList<>();
+        items.add(new City("Rabat","rabat", 4.5, "Rabat is the capital city of Morocco and the country's seventh-largest city with an urban population of approximately 580,000 (2014) and a metropolitan population of over 1.2 million. It is also the capital city of the Rabat-Salé-Kénitra administrative region. Rabat is located on the Atlantic Ocean at the mouth of the river Bou Regreg, opposite Salé, the city\\'s main commuter town."));
+        items.add(new City("Casablanca","casablanca", 4.5, "lorem ipsum"));
+        items.add(new City("Ifrane","ifrane", 4.5, "lorem ipsum"));
+        items.add(new City("Marrakech","marrakech", 4.5, "lorem ipsum"));
 
         binding.popularCities.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        binding.popularCities.setAdapter(new PopularCityAdapter(items));
+        binding.popularCities.setAdapter(new CityAdapter(items));
     }
 
 }
