@@ -3,7 +3,6 @@ package com.maghrebtrip.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -12,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners;
 import com.maghrebtrip.activities.DetailsActivity;
-import com.maghrebtrip.cities.City;
+import com.maghrebtrip.models.City;
 import com.maghrebtrip.databinding.ViewholderPupListBinding;
 
 import java.util.ArrayList;
@@ -36,10 +35,10 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.Viewholder> {
 
     @Override
     public void onBindViewHolder(@NonNull CityAdapter.Viewholder holder, int position) {
-        binding.cityName.setText(items.get(position).getCityName());
+        binding.cityName.setText(items.get(position).getName());
 
         int drawableResourceId = holder.itemView.getResources().getIdentifier(
-                items.get(position).getCityImage(),
+                items.get(position).getImage(),
                 "drawable",
                 holder.itemView.getContext().getPackageName());
 

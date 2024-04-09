@@ -8,9 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners;
 import com.maghrebtrip.R;
-import com.maghrebtrip.cities.City;
+import com.maghrebtrip.models.City;
 import com.maghrebtrip.databinding.ActivityDetailsBinding;
 
 
@@ -37,14 +36,14 @@ public class DetailsActivity extends AppCompatActivity {
     private void getBundles() {
         object = (City) getIntent().getSerializableExtra("object");
 
-        int drawableResourceId = this.getResources().getIdentifier(object.getCityImage(),
+        int drawableResourceId = this.getResources().getIdentifier(object.getImage(),
                 "drawable", this.getPackageName());
 
         Glide.with(this)
                 .load(drawableResourceId)
                 .into(binding.cityImage);
 
-        binding.cityName.setText(object.getCityName());
+        binding.cityName.setText(object.getName());
         binding.cityRating.setText(object.getRating()+"");
         binding.cityDescription.setText(object.getDescription());
 

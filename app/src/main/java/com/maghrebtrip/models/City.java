@@ -1,34 +1,34 @@
-package com.maghrebtrip.cities;
+package com.maghrebtrip.models;
 
 import java.io.Serializable;
 
 public class City implements Serializable {
-    private String cityName;
-    private String cityImage;
+    private String name;
+    private String image;
     private double rating;
     private String description;
 
-    public City(String cityName, String cityImage, double rating, String description) {
-        this.cityName = cityName;
-        this.cityImage = cityImage;
+    public City(String name, String image, double rating, String description) {
+        this.name = name;
+        this.image = image;
         this.rating = rating;
         this.description = description;
     }
 
-    public String getCityName() {
-        return cityName;
+    public String getName() {
+        return name;
     }
 
-    public void setCityName(String cityName) {
-        this.cityName = cityName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getCityImage() {
-        return cityImage;
+    public String getImage() {
+        return image;
     }
 
-    public void setCityImage(String cityImage) {
-        this.cityImage = cityImage;
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public double getRating() {
