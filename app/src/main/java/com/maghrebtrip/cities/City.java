@@ -1,12 +1,14 @@
 package com.maghrebtrip.cities;
 
-public class PopularCity {
+public class City {
     private String cityName;
     private String cityImage;
+    private double rating;
 
-    public PopularCity(String cityName, String cityImage) {
+    public City(String cityName, String cityImage, double rating) {
         this.cityName = cityName;
         this.cityImage = cityImage;
+        this.rating = rating;
     }
 
     public String getCityName() {
@@ -23,5 +25,13 @@ public class PopularCity {
 
     public void setCityImage(String cityImage) {
         this.cityImage = cityImage;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
     }
 }

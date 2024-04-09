@@ -8,8 +8,8 @@ import android.os.Bundle;
 import android.view.Window;
 
 import com.maghrebtrip.R;
-import com.maghrebtrip.adapters.PopularCityAdapter;
-import com.maghrebtrip.cities.PopularCity;
+import com.maghrebtrip.adapters.CityAdapter;
+import com.maghrebtrip.cities.City;
 import com.maghrebtrip.databinding.ActivityMainBinding;
 
 import java.util.ArrayList;
@@ -33,14 +33,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initRecyclerView() {
-        ArrayList<PopularCity> items = new ArrayList<>();
-        items.add(new PopularCity("Rabat","rabat"));
-        items.add(new PopularCity("Casablanca","casablanca"));
-        items.add(new PopularCity("Ifrane","ifrane"));
-        items.add(new PopularCity("Marrakech","marrakech"));
+        ArrayList<City> items = new ArrayList<>();
+        items.add(new City("Rabat","rabat", 4.5));
+        items.add(new City("Casablanca","casablanca", 4.5));
+        items.add(new City("Ifrane","ifrane", 4.5));
+        items.add(new City("Marrakech","marrakech", 4.5));
 
         binding.popularCities.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        binding.popularCities.setAdapter(new PopularCityAdapter(items));
+        binding.popularCities.setAdapter(new CityAdapter(items));
     }
 
 }
