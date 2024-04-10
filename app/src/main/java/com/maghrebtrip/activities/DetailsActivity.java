@@ -1,5 +1,6 @@
 package com.maghrebtrip.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -8,9 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners;
 import com.maghrebtrip.R;
-import com.maghrebtrip.cities.City;
+import com.maghrebtrip.models.City;
 import com.maghrebtrip.databinding.ActivityDetailsBinding;
 
 
@@ -37,14 +37,14 @@ public class DetailsActivity extends AppCompatActivity {
     private void getBundles() {
         object = (City) getIntent().getSerializableExtra("object");
 
-        int drawableResourceId = this.getResources().getIdentifier(object.getCityImage(),
+        int drawableResourceId = this.getResources().getIdentifier(object.getImage(),
                 "drawable", this.getPackageName());
 
         Glide.with(this)
                 .load(drawableResourceId)
                 .into(binding.cityImage);
 
-        binding.cityName.setText(object.getCityName());
+        binding.cityName.setText(object.getName());
         binding.cityRating.setText(object.getRating()+"");
         binding.cityDescription.setText(object.getDescription());
 
@@ -53,7 +53,8 @@ public class DetailsActivity extends AppCompatActivity {
         binding.goBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // select the city and show plans
+                Intent intent = new Intent(DetailsActivity.this, PlansActivity.class);
+                DetailsActivity.this.startActivity(intent);
             }
         });
     }

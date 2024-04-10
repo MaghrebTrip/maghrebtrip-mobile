@@ -11,31 +11,32 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners;
 import com.maghrebtrip.activities.DetailsActivity;
-import com.maghrebtrip.models.City;
-import com.maghrebtrip.databinding.ViewholderPupListBinding;
+import com.maghrebtrip.activities.PlanFragment1;
+import com.maghrebtrip.databinding.ViewholderAttractionListBinding;
+import com.maghrebtrip.models.Attraction;
 
 import java.util.ArrayList;
 
-public class CityAdapter extends RecyclerView.Adapter<CityAdapter.Viewholder> {
-    ArrayList<City> items;
+public class AttractionAdapter extends RecyclerView.Adapter<AttractionAdapter.Viewholder> {
+    ArrayList<Attraction> items;
     Context context;
-    ViewholderPupListBinding binding;
+    ViewholderAttractionListBinding binding;
 
-    public CityAdapter(ArrayList<City> items) {
+    public AttractionAdapter(ArrayList<Attraction> items) {
         this.items = items;
     }
 
     @NonNull
     @Override
-    public CityAdapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        binding = ViewholderPupListBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+    public AttractionAdapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        binding = ViewholderAttractionListBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         context = parent.getContext();
         return new Viewholder(binding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CityAdapter.Viewholder holder, int position) {
-        binding.cityName.setText(items.get(position).getName());
+    public void onBindViewHolder(@NonNull AttractionAdapter.Viewholder holder, int position) {
+        binding.attractionName.setText(items.get(position).getName());
 
         int drawableResourceId = holder.itemView.getResources().getIdentifier(
                 items.get(position).getImage(),
@@ -45,15 +46,10 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.Viewholder> {
         Glide.with(context)
                 .load(drawableResourceId)
                 .transform(new GranularRoundedCorners(30, 30, 0, 0))
-                .into(binding.cityImage);
+                .into(binding.attractionImage);
 
-        binding.cityRating.setText(items.get(position).getRating()+"");
-
-        holder.itemView.setOnClickListener(v -> {
-            Intent intent = new Intent(context, DetailsActivity.class);
-            intent.putExtra("object", items.get(position));
-            context.startActivity(intent);
-        });
+        binding.attractionType.setText(items.get(position).getType());
+        binding.attractionOpeningHours.setText(items.get(position).getOpeningHours().get(0)); // TODO: change this code
 
     }
 
@@ -63,7 +59,7 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.Viewholder> {
     }
 
     public class Viewholder extends RecyclerView.ViewHolder {
-        public Viewholder(@NonNull ViewholderPupListBinding binding) {
+        public Viewholder(@NonNull ViewholderAttractionListBinding binding) {
             super(binding.getRoot());
         }
     }

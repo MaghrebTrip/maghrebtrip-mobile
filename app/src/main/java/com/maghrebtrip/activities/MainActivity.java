@@ -9,7 +9,8 @@ import android.view.Window;
 
 import com.maghrebtrip.R;
 import com.maghrebtrip.adapters.CityAdapter;
-import com.maghrebtrip.cities.City;
+import com.maghrebtrip.models.Attraction;
+import com.maghrebtrip.models.City;
 import com.maghrebtrip.databinding.ActivityMainBinding;
 
 import java.util.ArrayList;
@@ -41,6 +42,14 @@ public class MainActivity extends AppCompatActivity {
 
         binding.popularCities.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         binding.popularCities.setAdapter(new CityAdapter(items));
+
+        ArrayList<Attraction> attractions = new ArrayList<>();
+        ArrayList<String> openingHours = new ArrayList<>();
+        openingHours.add("All days: 15h-17h");
+
+        attractions.add(new Attraction("Rabat", "Hotel Farah", "Hotel", "lorem ipsum", openingHours, "PLACE 16 NOVEMBRE, Bd Mohamed Lyazidi, Rabat 10000"));
+        attractions.add(new Attraction("Rabat", "Hassan Tower", "Historical landmark", "This famous red sandstone landmark is a remnant of a 12th-century minaret that was never finished.", openingHours, "Bd Mohamed Lyazidi, Rabat"));
+        attractions.add(new Attraction("Rabat", "Espace Hassan", "Restaurant", "lorem ipsum", openingHours, "25F9+64X, Av. Chellah, Rabat"));
     }
 
 }
