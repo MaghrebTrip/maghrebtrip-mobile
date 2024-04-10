@@ -6,14 +6,18 @@ import android.view.Window;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
-import com.maghrebtrip.PlanFragment1;
-import com.maghrebtrip.PlanFragment2;
 import com.maghrebtrip.R;
+import com.maghrebtrip.adapters.CityAdapter;
 import com.maghrebtrip.adapters.VPAdapter;
 import com.maghrebtrip.databinding.ActivityPlansBinding;
+import com.maghrebtrip.models.Attraction;
+import com.maghrebtrip.models.City;
+
+import java.util.ArrayList;
 
 public class PlansActivity extends AppCompatActivity {
 

@@ -47,9 +47,9 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<String> openingHours = new ArrayList<>();
         openingHours.add("All days: 15h-17h");
 
-        attractions.add(new Attraction("Hotel Farah", "Hotel", "lorem ipsum", openingHours, "PLACE 16 NOVEMBRE, Bd Mohamed Lyazidi, Rabat 10000"));
-        attractions.add(new Attraction("Hassan Tower", "Historical landmark", "This famous red sandstone landmark is a remnant of a 12th-century minaret that was never finished.", openingHours, "Bd Mohamed Lyazidi, Rabat"));
-        attractions.add(new Attraction("Espace Hassan", "Restaurant", "lorem ipsum", openingHours, "25F9+64X, Av. Chellah, Rabat"));
+        attractions.add(new Attraction("Rabat", "Hotel Farah", "Hotel", "lorem ipsum", openingHours, "PLACE 16 NOVEMBRE, Bd Mohamed Lyazidi, Rabat 10000"));
+        attractions.add(new Attraction("Rabat", "Hassan Tower", "Historical landmark", "This famous red sandstone landmark is a remnant of a 12th-century minaret that was never finished.", openingHours, "Bd Mohamed Lyazidi, Rabat"));
+        attractions.add(new Attraction("Rabat", "Espace Hassan", "Restaurant", "lorem ipsum", openingHours, "25F9+64X, Av. Chellah, Rabat"));
     }
 
 }
