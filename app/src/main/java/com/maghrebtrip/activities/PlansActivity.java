@@ -46,6 +46,8 @@ public class PlansActivity extends AppCompatActivity {
         vpAdapter.addFragment(new PlanFragment2(), "Second Plan");
 
         viewPager.setAdapter(vpAdapter);
+
+        binding.backBtn.setOnClickListener(v -> finish());
     }
 
     private void statusBarColor() {
