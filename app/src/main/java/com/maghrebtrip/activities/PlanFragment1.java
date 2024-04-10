@@ -1,5 +1,6 @@
 package com.maghrebtrip.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -42,7 +43,8 @@ public class PlanFragment1 extends Fragment {
         rootView.findViewById(R.id.choosePlanBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: show map activity
+                Intent intent = new Intent(getActivity(), MapsActivity.class);
+                startActivity(intent);
             }
         });
 
