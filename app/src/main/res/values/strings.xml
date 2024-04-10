@@ -17,4 +17,6 @@
     <string name="city_rating">4.5</string>
     <string name="city_description">Rabat is the capital city of Morocco and the country\'s seventh-largest city with an urban population of approximately 580,000 (2014) and a metropolitan population of over 1.2 million. It is also the capital city of the Rabat-Salé-Kénitra administrative region. Rabat is located on the Atlantic Ocean at the mouth of the river Bou Regreg, opposite Salé, the city\'s main commuter town.</string>
     <string name="go_btn">Let\'s Go</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.maghrebtrip.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -52,7 +53,8 @@ public class DetailsActivity extends AppCompatActivity {
         binding.goBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // select the city and show plans
+                Intent intent = new Intent(DetailsActivity.this, PlansActivity.class);
+                DetailsActivity.this.startActivity(intent);
             }
         });
     }
