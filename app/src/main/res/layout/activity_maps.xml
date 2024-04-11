@@ -49,6 +49,7 @@
     </LinearLayout>
 
     <fragment
+        xmlns:map="http://schemas.android.com/apk/res-auto"
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
@@ -57,6 +58,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        tools:context=".activities.MapsActivity" />
+        tools:context=".activities.MapsActivity"
+        map:uiZoomControls="true"
+        map:uiRotateGestures="true"
+        map:cameraTilt="30"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
