@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="6dp"
             android:text="@string/city_rating"
-            android:textColor="@color/coral"
+            android:textColor="@color/red"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -47,7 +47,7 @@
             android:id="@+id/starIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:tint="@color/coral"
+            app:tint="@color/red"
             android:src="@drawable/star" />
     </LinearLayout>
 

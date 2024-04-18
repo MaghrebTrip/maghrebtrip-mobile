@@ -9,7 +9,7 @@ public class Attraction {
     private String type;
     private String description;
     private ArrayList<String> openingHours;
-    private String location; // TODO: change location type
+    private String location;
 
     public Attraction(String image, String name, String type, String description, ArrayList<String> openingHours, String location) {
         this.image = image;
