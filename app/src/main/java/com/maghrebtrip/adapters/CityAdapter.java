@@ -2,6 +2,8 @@ package com.maghrebtrip.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -12,23 +14,24 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners;
 import com.maghrebtrip.activities.DetailsActivity;
 import com.maghrebtrip.models.City;
-import com.maghrebtrip.databinding.ViewholderPupListBinding;
+import com.maghrebtrip.databinding.ViewholderCitiesListBinding;
 
-import java.util.ArrayList;
+import android.util.Base64;
+import java.util.List;
 
 public class CityAdapter extends RecyclerView.Adapter<CityAdapter.Viewholder> {
-    ArrayList<City> items;
+    List<City> items;
     Context context;
-    ViewholderPupListBinding binding;
+    ViewholderCitiesListBinding binding;
 
-    public CityAdapter(ArrayList<City> items) {
+    public CityAdapter(List<City> items) {
         this.items = items;
     }
 
     @NonNull
     @Override
     public CityAdapter.Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        binding = ViewholderPupListBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        binding = ViewholderCitiesListBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         context = parent.getContext();
         return new Viewholder(binding);
     }
@@ -37,15 +40,11 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.Viewholder> {
     public void onBindViewHolder(@NonNull CityAdapter.Viewholder holder, int position) {
         binding.cityName.setText(items.get(position).getName());
 
-        int drawableResourceId = holder.itemView.getResources().getIdentifier(
-                items.get(position).getImage(),
-                "drawable",
-                holder.itemView.getContext().getPackageName());
+        String imageData = items.get(position).getImage();
+        byte[] decodedString = Base64.decode(imageData, Base64.DEFAULT);
+        Bitmap decodedBitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
 
-        Glide.with(context)
-                .load(drawableResourceId)
-                .transform(new GranularRoundedCorners(30, 30, 0, 0))
-                .into(binding.cityImage);
+        binding.cityImage.setImageBitmap(decodedBitmap);
 
         binding.cityRating.setText(items.get(position).getRating()+"");
 
@@ -63,7 +62,7 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.Viewholder> {
     }
 
     public class Viewholder extends RecyclerView.ViewHolder {
-        public Viewholder(@NonNull ViewholderPupListBinding binding) {
+        public Viewholder(@NonNull ViewholderCitiesListBinding binding) {
             super(binding.getRoot());
         }
     }

@@ -12,10 +12,10 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-
         android:supportsRtl="true"
         android:theme="@style/Theme.MaghrebTrip"
-        tools:targetApi="31">
+        android:usesCleartextTraffic="true"
+        tools:targetApi="31"> <!-- usesCleartextTraffic to bypass https -->
 
         <activity
             android:name=".activities.LoginActivity"
