@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "464261518986",
+    "project_id": "maghrebtrip-aa384",
+    "storage_bucket": "maghrebtrip-aa384.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:464261518986:android:84a5ac90564ef5054b3f73",
+        "android_client_info": {
+          "package_name": "com.maghrebtrip"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcie2SBZneEC7CujfLtx5Ogw88xl71pC0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
