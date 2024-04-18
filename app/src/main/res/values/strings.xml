@@ -23,4 +23,5 @@
     <string name="attraction_type">Historical landmark</string>
     <string name="attraction_opening_hours">All day at: 15h-17h</string>
     <string name="title_activity_maps">MapsActivity</string>
+    <string name="explore_subtitle">Explore the world of Morocco</string>
 </resources>

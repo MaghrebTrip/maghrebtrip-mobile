@@ -37,7 +37,7 @@ public class DetailsActivity extends AppCompatActivity {
     private void getBundles() {
         object = (City) getIntent().getSerializableExtra("object");
 
-        int drawableResourceId = this.getResources().getIdentifier(object.getImage(),
+        int drawableResourceId = this.getResources().getIdentifier("rabat", // TODO: convert object.getImage()
                 "drawable", this.getPackageName());
 
         Glide.with(this)
@@ -46,7 +46,7 @@ public class DetailsActivity extends AppCompatActivity {
 
         binding.cityName.setText(object.getName());
         binding.cityRating.setText(object.getRating()+"");
-        binding.cityDescription.setText(object.getDescription());
+        binding.cityDescription.setText(object.getAbout());
 
         binding.backBtn.setOnClickListener(v -> finish());
 

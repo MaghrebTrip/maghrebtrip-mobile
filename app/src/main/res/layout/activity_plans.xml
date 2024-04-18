@@ -35,10 +35,11 @@
                 app:tint="@color/white" />
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/shareBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
+                android:padding="8dp"
                 android:src="@drawable/share"
                 app:layout_constraintBottom_toBottomOf="@+id/backBtn"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -66,6 +67,8 @@
             app:layout_constraintTop_toTopOf="parent"
             app:tabIndicatorColor="@color/red"
             app:tabSelectedTextColor="@color/red"
+            app:tabBackground="@color/white"
+            app:tabRippleColor="@color/white"
             app:tabTextColor="@color/black">
 
             <com.google.android.material.tabs.TabItem
