@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
+        // idrissiahmed2002@gmail.com : 123456
         statusBarColor();
         initRecyclerView();
     }
@@ -51,9 +51,14 @@ public class MainActivity extends AppCompatActivity {
             new Callback<List<City>>() {
                 @Override
                 public void onResponse(Call<List<City>> call, Response<List<City>> response) {
-                    binding.popularCities.setLayoutManager(new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false));
-                    binding.popularCities.setAdapter(new CityAdapter(response.body()));
-                    Toast.makeText(MainActivity.this, "Cities loaded successfully!", Toast.LENGTH_SHORT).show();
+                    List<City> cities = response.body();
+                    if (cities != null) {
+                        binding.popularCities.setLayoutManager(new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL, false));
+                        binding.popularCities.setAdapter(new CityAdapter(cities));
+                        Toast.makeText(MainActivity.this, "Cities loaded successfully!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(MainActivity.this, "Empty data", Toast.LENGTH_SHORT).show();
+                    }
                 }
 
                 @Override
