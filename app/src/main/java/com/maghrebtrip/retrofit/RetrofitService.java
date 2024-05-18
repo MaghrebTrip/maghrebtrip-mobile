@@ -9,14 +9,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitService {
     Retrofit retrofit;
-    int port = 8080;
+    int port = 8082;
 
     public RetrofitService(int port) {
         initializeRetrofit(port);
     }
 
     public void initializeRetrofit(int port) {
-        String baseUrl = "http://100.91.178.214:" + port; // to get the IP address type: ipconfig and search for your IPv4
+        String baseUrl = "http://192.168.11.124:" + port; // to get the IP address type: ipconfig and search for your IPv4
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.level(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder().addInterceptor(logging);

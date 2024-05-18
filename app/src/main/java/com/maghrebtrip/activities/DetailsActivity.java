@@ -13,7 +13,6 @@ import com.maghrebtrip.R;
 import com.maghrebtrip.models.City;
 import com.maghrebtrip.databinding.ActivityDetailsBinding;
 
-
 public class DetailsActivity extends AppCompatActivity {
 
     private ActivityDetailsBinding binding;
@@ -53,10 +52,9 @@ public class DetailsActivity extends AppCompatActivity {
         binding.goBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DetailsActivity.this, PlansActivity.class);
+                Intent intent = new Intent(DetailsActivity.this, SelectionActivity.class);
                 DetailsActivity.this.startActivity(intent);
             }
         });
     }
-
 }

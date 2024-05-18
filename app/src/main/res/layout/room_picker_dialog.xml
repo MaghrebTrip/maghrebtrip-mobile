@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/img_2">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/cornel_red"
+        android:alpha="0.16"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_above="@id/card_view"
+        android:padding="28dp">
+
+        <ImageView
+            android:layout_width="136dp"
+            android:layout_height="80dp"
+            android:src="@drawable/maghrebtrip_logo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="MaghrebTrip"
+            android:textColor="@color/white"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="28dp"
+        app:cardCornerRadius="28dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="28dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Select Number of rooms"
+                android:textColor="@color/cornel_red"
+                android:textSize="28sp"
+                android:textStyle="bold" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp" />
+
+                <!-- Children -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/numberOfRoomsTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Rooms :"
+                        android:textSize="17sp" />
+                    <View
+                        android:layout_width="8dp"
+                        android:layout_height="0dp" />
+
+                    <Button
+                        android:id="@+id/roomMinusButton"
+                        android:layout_width="60dp"
+                        android:layout_height="40dp"
+                        android:onClick="decrementNumberOfRooms"
+                        android:text="-"
+                        android:textSize="18sp" />
+
+                    <View
+                        android:layout_width="12dp"
+                        android:layout_height="0dp" />
+
+
+                    <TextView
+                        android:id="@+id/numberOfRooms"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp" />
+
+                    <View
+                        android:layout_width="12dp"
+                        android:layout_height="0dp" />
+
+                    <Button
+                        android:id="@+id/roomPlusButton"
+                        android:layout_width="60dp"
+                        android:layout_height="40dp"
+                        android:onClick="incrementNumberOfRooms"
+                        android:text="+"
+                        android:textSize="18sp" />
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="150dp" />
+
+                </LinearLayout>
+
+                <!-- Done Button -->
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

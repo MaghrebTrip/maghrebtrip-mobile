@@ -36,6 +36,9 @@
         <activity
             android:name=".activities.DetailsActivity"
             android:exported="true"/>
+        <activity
+            android:name=".activities.SelectionActivity"
+            android:exported="true"/>
 
         <activity
             android:name=".activities.PlansActivity"
