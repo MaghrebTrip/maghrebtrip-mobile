@@ -1,7 +1,17 @@
 package com.maghrebtrip.activities;
 
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
+import android.util.Log;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.View;
 import android.view.Window;
 
@@ -13,11 +23,13 @@ import com.maghrebtrip.R;
 import com.maghrebtrip.models.City;
 import com.maghrebtrip.databinding.ActivityDetailsBinding;
 
-
 public class DetailsActivity extends AppCompatActivity {
 
     private ActivityDetailsBinding binding;
     private City object;
+    private static final String TAG = "DetailsActivityTag";
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,26 +49,34 @@ public class DetailsActivity extends AppCompatActivity {
     private void getBundles() {
         object = (City) getIntent().getSerializableExtra("object");
 
-        int drawableResourceId = this.getResources().getIdentifier("rabat", // TODO: convert object.getImage()
-                "drawable", this.getPackageName());
+        String imageData = object.getImage();
+        byte[] decodedString = Base64.decode(imageData, Base64.DEFAULT);
+        Bitmap decodedBitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
 
-        Glide.with(this)
-                .load(drawableResourceId)
-                .into(binding.cityImage);
+        binding.cityImageDetails.setImageBitmap(decodedBitmap);
 
-        binding.cityName.setText(object.getName());
-        binding.cityRating.setText(object.getRating()+"");
-        binding.cityDescription.setText(object.getAbout());
+
+        binding.cityNameDetails.setText(object.getName());
+        binding.cityRatingDetails.setText(object.getRating()+"");
+        binding.cityDescriptionDetails.setText(object.getAbout());
+        binding.cityImageDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Log.i(TAG, "City Name: " + object.getName());
+                Log.i(TAG, "City Rating: " + object.getRating());
+                Log.i(TAG, "City Description: " + object.getAbout());
+            }
+        });
 
         binding.backBtn.setOnClickListener(v -> finish());
 
         binding.goBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DetailsActivity.this, PlansActivity.class);
+                Intent intent = new Intent(DetailsActivity.this, SelectionActivity.class);
                 DetailsActivity.this.startActivity(intent);
             }
         });
     }
-
 }

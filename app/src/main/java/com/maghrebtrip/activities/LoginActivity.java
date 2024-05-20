@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +30,8 @@ public class LoginActivity extends AppCompatActivity {
 
     FirebaseAuth mAuth;
     FirebaseUser mUser;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -57,6 +60,7 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+
         
     }
 

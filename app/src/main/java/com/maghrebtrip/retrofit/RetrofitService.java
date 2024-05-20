@@ -2,22 +2,28 @@ package com.maghrebtrip.retrofit;
 
 import com.google.gson.Gson;
 
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitService {
     Retrofit retrofit;
-    int port = 8080;
+    int port = 8082;
 
     public RetrofitService(int port) {
         initializeRetrofit(port);
     }
 
     public void initializeRetrofit(int port) {
-        // to get the IP address type: ipconfig and search for your IPv4
+        String baseUrl = "http://10.1.6.9:" + port; // to get the IP address type: ipconfig and search for your IPv4
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        logging.level(HttpLoggingInterceptor.Level.BODY);
+        OkHttpClient.Builder httpClient = new OkHttpClient.Builder().addInterceptor(logging);
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.56.1:" + port)
+                .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create(new Gson()))
+                .client(httpClient.build())
                 .build();
     }
 

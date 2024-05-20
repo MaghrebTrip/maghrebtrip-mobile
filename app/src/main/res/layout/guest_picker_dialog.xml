@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/img_2">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/cornel_red"
+        android:alpha="0.16"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_above="@id/card_view"
+        android:padding="28dp">
+
+        <ImageView
+            android:layout_width="136dp"
+            android:layout_height="80dp"
+            android:src="@drawable/maghrebtrip_logo" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="MaghrebTrip"
+            android:textColor="@color/white"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="28dp"
+        app:cardCornerRadius="28dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="28dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Select Number of Guests"
+                android:textColor="@color/cornel_red"
+                android:textSize="28sp"
+                android:textStyle="bold" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp" />
+                <!-- Adults -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/numberOfAdultsTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Adults:    "
+                        android:textSize="18sp" />
+                    <View
+                        android:layout_width="7dp"
+                        android:layout_height="0dp" />
+
+                    <Button
+                        android:id="@+id/adultMinusButton"
+                        android:layout_width="60dp"
+                        android:layout_height="40dp"
+                        android:onClick="decrementNumberOfAdults"
+                        android:text="-"
+                        android:textSize="18sp" />
+
+                    <View
+                        android:layout_width="15dp"
+                        android:layout_height="0dp" />
+
+                    <TextView
+                        android:id="@+id/numberOfAdults"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp" />
+
+                    <View
+                        android:layout_width="15dp"
+                        android:layout_height="0dp" />
+
+                    <Button
+                        android:id="@+id/adultPlusButton"
+                        android:layout_width="60dp"
+                        android:layout_height="40dp"
+                        android:onClick="incrementNumberOfAdults"
+                        android:text="+"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <!-- Children -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/numberOfChildrenTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Children: "
+                        android:textSize="18sp" />
+                    <View
+                        android:layout_width="7dp"
+                        android:layout_height="0dp" />
+
+                    <Button
+                        android:id="@+id/childMinusButton"
+                        android:layout_width="60dp"
+                        android:layout_height="40dp"
+                        android:onClick="decrementNumberOfChildren"
+                        android:text="-"
+                        android:textSize="18sp" />
+
+                    <View
+                        android:layout_width="15dp"
+                        android:layout_height="0dp" />
+
+
+                    <TextView
+                        android:id="@+id/numberOfChildren"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp" />
+
+                    <View
+                        android:layout_width="15dp"
+                        android:layout_height="0dp" />
+
+                    <Button
+                        android:id="@+id/childPlusButton"
+                        android:layout_width="60dp"
+                        android:layout_height="40dp"
+                        android:onClick="incrementNumberOfChildren"
+                        android:text="+"
+                        android:textSize="18sp" />
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="90dp" />
+
+                </LinearLayout>
+
+                <!-- Done Button -->
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>
