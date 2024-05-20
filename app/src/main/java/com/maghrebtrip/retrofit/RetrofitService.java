@@ -16,7 +16,7 @@ public class RetrofitService {
     }
 
     public void initializeRetrofit(int port) {
-        String baseUrl = "http://192.168.11.124:" + port; // to get the IP address type: ipconfig and search for your IPv4
+        String baseUrl = "http://10.1.6.9:" + port; // to get the IP address type: ipconfig and search for your IPv4
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.level(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient.Builder httpClient = new OkHttpClient.Builder().addInterceptor(logging);

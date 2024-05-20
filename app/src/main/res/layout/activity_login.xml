@@ -152,6 +152,7 @@
                     android:background="@drawable/facebook_icon" />
 
                 <ImageView
+                    android:id="@+id/btnGoogle"
                     android:layout_width="55dp"
                     android:layout_height="40dp"
                     android:layout_margin="12dp"

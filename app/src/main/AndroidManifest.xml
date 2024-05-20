@@ -26,6 +26,10 @@
             </intent-filter>
         </activity>
 
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCbvSyiejGY5dJY2s_SA-U_4Cv4ocmpq0Y"/>
+
         <activity
             android:name=".activities.MainActivity"
             android:exported="true"/>
@@ -44,9 +48,10 @@
             android:name=".activities.PlansActivity"
             android:exported="true"/>
 
+
         <activity
             android:name=".activities.MapsActivity"
-            android:exported="false"
+            android:exported="true"
             android:label="@string/title_activity_maps" />
 
     </application>
