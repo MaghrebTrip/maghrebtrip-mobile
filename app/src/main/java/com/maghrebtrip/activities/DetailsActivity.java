@@ -59,15 +59,6 @@ public class DetailsActivity extends AppCompatActivity {
         binding.cityNameDetails.setText(object.getName());
         binding.cityRatingDetails.setText(object.getRating()+"");
         binding.cityDescriptionDetails.setText(object.getAbout());
-        binding.cityImageDetails.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Log.i(TAG, "City Name: " + object.getName());
-                Log.i(TAG, "City Rating: " + object.getRating());
-                Log.i(TAG, "City Description: " + object.getAbout());
-            }
-        });
 
         binding.backBtn.setOnClickListener(v -> finish());
 
@@ -75,6 +66,8 @@ public class DetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(DetailsActivity.this, SelectionActivity.class);
+                intent.putExtra("cityId", object.getId().intValue());
+                intent.putExtra("cityName", object.getName());
                 DetailsActivity.this.startActivity(intent);
             }
         });

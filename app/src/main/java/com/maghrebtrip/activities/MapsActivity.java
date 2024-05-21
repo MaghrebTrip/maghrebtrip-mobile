@@ -10,6 +10,7 @@ import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
 import android.view.Window;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -22,6 +23,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.maghrebtrip.R;
 import com.maghrebtrip.databinding.ActivityMapsBinding;
+import com.maghrebtrip.models.Attraction;
+import com.maghrebtrip.utils.LocationParser;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -30,6 +33,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -75,81 +80,65 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
-    private void getRoutes() throws IOException {
-        String originLat = "34.0258769";
-        String originLng = "-6.8260299";
-        String destLat = "34.0222944";
-        String destLng = "-6.8301424";
-        String API_KEY = "";
-
-        String url = "https://maps.googleapis.com/maps/api/directions/json?"
-                + "origin=" + originLat + "," + originLng
-                + "&destination=" + destLat + "," + destLng
-                + "&key=" + API_KEY;
-
-        HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
-        InputStream inputStream = connection.getInputStream();
-
-        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-        StringBuilder response = new StringBuilder();
-        String line;
-        while ((line = reader.readLine()) != null) {
-            response.append(line);
-        }
-        reader.close();
-    }
+//    private void getRoutes() throws IOException {
+//        String originLat = "34.0258769";
+//        String originLng = "-6.8260299";
+//        String destLat = "34.0222944";
+//        String destLng = "-6.8301424";
+//        String API_KEY = "";
+//
+//        String url = "https://maps.googleapis.com/maps/api/directions/json?"
+//                + "origin=" + originLat + "," + originLng
+//                + "&destination=" + destLat + "," + destLng
+//                + "&key=" + API_KEY;
+//
+//        HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
+//        InputStream inputStream = connection.getInputStream();
+//
+//        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+//        StringBuilder response = new StringBuilder();
+//        String line;
+//        while ((line = reader.readLine()) != null) {
+//            response.append(line);
+//        }
+//        reader.close();
+//    }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        Location location1;
-        Location location2;
-        Location location3;
+        List<Attraction> attractions = new ArrayList<>();
+        if (getIntent().hasExtra("attractions")) {
+            attractions = (List<Attraction>) getIntent().getSerializableExtra("attractions");
+        } else {
+            Toast.makeText(MapsActivity.this, "Attractions not found", Toast.LENGTH_SHORT).show();
+        }
 
-        final LatLng attraction1 = new LatLng(34.0258769,-6.8260299);
-        final LatLng attraction2 = new LatLng(34.0242107,-6.8231208);
-        final LatLng attraction3 = new LatLng(34.0222944,-6.8301424);
-
-        Marker markerAttraction1;
-        Marker markerAttraction2;
-        Marker markerAttraction3;
-
-        markerAttraction1 = mMap.addMarker(new MarkerOptions()
-                .position(attraction1)
-                .title("Attraction 1"));
-        markerAttraction1.setTag(0);
-
-        markerAttraction2 = mMap.addMarker(new MarkerOptions()
-                .position(attraction2)
-                .title("Attraction 2"));
-        markerAttraction2.setTag(0);
-
-        markerAttraction3 = mMap.addMarker(new MarkerOptions()
-                .position(attraction3)
-                .title("Attraction 3"));
-        markerAttraction3.setTag(0);
+        List<LatLng> coordinatesList = new ArrayList<>();
+        for (Attraction attraction : attractions) {
+            String location = attraction.getLocation();
+            double[] coordinates = LocationParser.parseLocation(location);
+            LatLng latLng = new LatLng(coordinates[0], coordinates[1]);
+            Marker marker;
+            marker = mMap.addMarker(new MarkerOptions()
+                    .position(latLng)
+                    .title(attraction.getName()));
+            marker.setTag(0);
+            coordinatesList.add(latLng);
+        }
 
         PolylineOptions polylineOptions = new PolylineOptions()
-                .add(attraction1)
-                .add(attraction2)
-                .add(attraction3)
-                .color(Color.RED); // Set color of the polyline
-
+                .add(coordinatesList.get(0))
+                .add(coordinatesList.get(1))
+                .add(coordinatesList.get(2))
+                .color(Color.RED);
         mMap.addPolyline(polylineOptions);
-        // mMap.moveCamera(CameraUpdateFactory.newLatLng(attraction1));
+
+        // mMap.moveCamera(CameraUpdateFactory.newLatLng(coordinatesList.get(0)));
 
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(
-                attraction1, 16f);
+                coordinatesList.get(0), 16f);
         mMap.animateCamera(cameraUpdate);
-
-//        try {
-//            this.getRoutes();
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-
-        // final String placeId = "ChIJ8QoUlJFrpw0RXGFGkplsNhM";
-
     }
 }

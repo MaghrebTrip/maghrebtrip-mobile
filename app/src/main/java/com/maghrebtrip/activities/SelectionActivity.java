@@ -7,7 +7,11 @@ import android.text.InputType;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.maghrebtrip.R;
+import com.maghrebtrip.databinding.ActivitySelectionBinding;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,6 +20,11 @@ import java.util.Calendar;
 import java.util.Locale;
 
 public class SelectionActivity extends AppCompatActivity {
+
+    ActivitySelectionBinding binding;
+
+    // For city
+    private TextView cityTextView;
 
     // For number picker
     private EditText adultsAndChildrenEditText;
@@ -34,7 +43,24 @@ public class SelectionActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_selection); // Replace "your_layout" with your layout file name
+        binding = ActivitySelectionBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        getBundles();
+    }
+
+    private void getBundles() {
+        // Initialize city EditText
+        cityTextView = findViewById(R.id.destinationTextView);
+
+        // Fill city name field
+        if (getIntent().hasExtra("cityName")) {
+            String cityName = getIntent().getStringExtra("cityName");
+            cityTextView.setText(cityName);
+        } else {
+            Toast.makeText(this, "City name not found", Toast.LENGTH_SHORT).show();
+            finish();
+        }
 
         // Initialize number picker EditText
         adultsAndChildrenEditText = findViewById(R.id.numberOfGuestsEditText);
@@ -64,13 +90,22 @@ public class SelectionActivity extends AppCompatActivity {
             updateDateInView(checkOutDateEditText);
         };
         // Continue button
-        findViewById(R.id.btnContinue).setOnClickListener(new View.OnClickListener() {
+        binding.btnContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SelectionActivity.this, PlansActivity.class);
+                int cityId = 0;
+                if (getIntent().hasExtra("cityId")) {
+                    cityId = getIntent().getIntExtra("cityId", 0);
+                } else {
+                    Toast.makeText(SelectionActivity.this, "City ID not found", Toast.LENGTH_SHORT).show();
+                }
+                intent.putExtra("cityId", cityId);
                 startActivity(intent);
             }
         });
+
+        binding.backBtn.setOnClickListener(v -> finish());
     }
 
     // Method to show the number picker dialog

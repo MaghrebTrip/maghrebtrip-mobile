@@ -2,6 +2,9 @@ package com.maghrebtrip.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -14,15 +17,16 @@ import com.maghrebtrip.activities.DetailsActivity;
 import com.maghrebtrip.activities.PlanFragment1;
 import com.maghrebtrip.databinding.ViewholderAttractionListBinding;
 import com.maghrebtrip.models.Attraction;
+import com.maghrebtrip.models.Schedule;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class AttractionAdapter extends RecyclerView.Adapter<AttractionAdapter.Viewholder> {
-    ArrayList<Attraction> items;
+    List<Attraction> items;
     Context context;
     ViewholderAttractionListBinding binding;
 
-    public AttractionAdapter(ArrayList<Attraction> items) {
+    public AttractionAdapter(List<Attraction> items) {
         this.items = items;
     }
 
@@ -38,18 +42,17 @@ public class AttractionAdapter extends RecyclerView.Adapter<AttractionAdapter.Vi
     public void onBindViewHolder(@NonNull AttractionAdapter.Viewholder holder, int position) {
         binding.attractionName.setText(items.get(position).getName());
 
-        int drawableResourceId = holder.itemView.getResources().getIdentifier(
-                items.get(position).getImage(),
-                "drawable",
-                holder.itemView.getContext().getPackageName());
-
-        Glide.with(context)
-                .load(drawableResourceId)
-                .transform(new GranularRoundedCorners(30, 30, 0, 0))
-                .into(binding.attractionImage);
+        String imageData = items.get(position).getImage();
+        byte[] decodedString = Base64.decode(imageData, Base64.DEFAULT);
+        Bitmap decodedBitmap = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+        binding.attractionImage.setImageBitmap(decodedBitmap);
 
         binding.attractionType.setText(items.get(position).getType());
-        binding.attractionOpeningHours.setText(items.get(position).getOpeningHours().get(0)); // TODO: change this code
+        List<Schedule> schedules = items.get(position).getSchedules();
+        binding.attractionOpeningHours.setText(
+                //String.format("%s: %s -> %s", schedules.get(0).getDayOfWeek(), schedules.get(0).getStartTime(), schedules.get(0).getEndTime())
+                String.format("%s: %s -> %s", "Monday", "09h00", "16h00")
+        );
 
     }
 

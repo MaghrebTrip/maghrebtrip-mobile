@@ -1,31 +1,49 @@
 package com.maghrebtrip.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
-public class Attraction {
+public class Attraction implements Serializable {
 
-    private  String image;
+    private Integer id;
+    private Integer cityId;
     private String name;
+    private String image;
     private String type;
     private String description;
-    private ArrayList<String> openingHours;
+    private List<Schedule> schedules;
     private String location;
+    private float rating;
+    private int sponsored;
 
-    public Attraction(String image, String name, String type, String description, ArrayList<String> openingHours, String location) {
-        this.image = image;
+    public Attraction(Integer id, Integer cityId, String name, String image, String type, String description, List<Schedule> schedules, String location, float rating, int sponsored) {
+        this.id = id;
+        this.cityId = cityId;
         this.name = name;
+        this.image = image;
         this.type = type;
         this.description = description;
-        this.openingHours = openingHours;
+        this.schedules = schedules;
         this.location = location;
+        this.rating = rating;
+        this.sponsored = sponsored;
     }
 
-    public String getImage() {
-        return image;
+    public Integer getId() {
+        return id;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getCityId() {
+        return cityId;
+    }
+
+    public void setCityId(Integer cityId) {
+        this.cityId = cityId;
     }
 
     public String getName() {
@@ -34,6 +52,14 @@ public class Attraction {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getType() {
@@ -52,12 +78,12 @@ public class Attraction {
         this.description = description;
     }
 
-    public ArrayList<String> getOpeningHours() {
-        return openingHours;
+    public List<Schedule> getSchedules() {
+        return schedules;
     }
 
-    public void setOpeningHours(ArrayList<String> openingHours) {
-        this.openingHours = openingHours;
+    public void setSchedules(List<Schedule> schedules) {
+        this.schedules = schedules;
     }
 
     public String getLocation() {
@@ -66,5 +92,21 @@ public class Attraction {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public float getRating() {
+        return rating;
+    }
+
+    public void setRating(float rating) {
+        this.rating = rating;
+    }
+
+    public int getSponsored() {
+        return sponsored;
+    }
+
+    public void setSponsored(int sponsored) {
+        this.sponsored = sponsored;
     }
 }

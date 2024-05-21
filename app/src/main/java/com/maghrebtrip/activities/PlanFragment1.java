@@ -10,16 +10,27 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.maghrebtrip.R;
 import com.maghrebtrip.adapters.AttractionAdapter;
-import com.maghrebtrip.adapters.CityAdapter;
 import com.maghrebtrip.models.Attraction;
-import com.maghrebtrip.models.City;
+import com.maghrebtrip.models.Plan;
+import com.maghrebtrip.retrofit.PlanApi;
+import com.maghrebtrip.retrofit.RetrofitService;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class PlanFragment1 extends Fragment {
+    private List<Attraction> attractions = new ArrayList<>();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -28,22 +39,43 @@ public class PlanFragment1 extends Fragment {
         RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.plan1AttractionList);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        // TODO: change this fake data
-        ArrayList<Attraction> attractions = new ArrayList<>();
-        ArrayList<String> openingHours = new ArrayList<>();
-        openingHours.add("All days: 15h-17h");
-        attractions.add(new Attraction("hotel_farah_rabat", "Hotel Farah Rabat", "Hotel", "Set in a Moorish-inspired whitewashed building, this premium hotel with views of the Bou Regreg River is a 5-minute walk from the 12th-century Hassan Tower.", openingHours, "PLACE 16 NOVEMBRE, Bd Mohamed Lyazidi, Rabat 10000"));
-        attractions.add(new Attraction("rabat", "Hassan Tower", "Historical landmark", "This famous red sandstone landmark is a remnant of a 12th-century minaret that was never finished.", openingHours, "Bd Mohamed Lyazidi, Rabat"));
-        attractions.add(new Attraction("coq_magic", "Coq Magic", "Restaurant", "lorem ipsum", openingHours, "Angle Rue Mekka et Rue El Mourabitine, Rabat 10020"));
+        RetrofitService retrofitService = new RetrofitService(8083);
+        PlanApi planApi = retrofitService.getRetrofit().create(PlanApi.class);
 
-        AttractionAdapter adapter = new AttractionAdapter(attractions);
+        int cityId = 0;
 
-        recyclerView.setAdapter(adapter);
+        Bundle args = getArguments();
+        if (args != null && args.containsKey("cityId")) {
+            cityId = args.getInt("cityId");
+        }
+
+
+        planApi.getPlansByCity(cityId).enqueue(new Callback<List<Plan>>() {
+            @Override
+            public void onResponse(Call<List<Plan>> call, Response<List<Plan>> response) {
+                List<Plan> plans = response.body();
+                if (plans != null) {
+                    attractions = plans.get(0).getAttractions();
+                    AttractionAdapter adapter = new AttractionAdapter(attractions);
+                    recyclerView.setAdapter(adapter);
+                    Toast.makeText(getActivity(), "Plans loaded successfully!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getActivity(), "Empty data", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Plan>> call, Throwable t) {
+                Toast.makeText(getActivity(), "Failed to load plans!", Toast.LENGTH_SHORT).show();
+                Logger.getLogger(getActivity().getClass().getName()).log(Level.SEVERE, "Error occurred", t);
+            }
+        });
 
         rootView.findViewById(R.id.choosePlanBtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), MapsActivity.class);
+                intent.putExtra("attractions", (Serializable) attractions);
                 startActivity(intent);
             }
         });
