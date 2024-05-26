@@ -1,10 +1,8 @@
 package com.maghrebtrip.activities;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -18,11 +16,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.Firebase;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.maghrebtrip.R;
+import com.maghrebtrip.activities.main.MainActivity;
 
 public class RegisterActivity extends AppCompatActivity {
     TextView alreadyHaveaccount;
@@ -101,7 +99,7 @@ public class RegisterActivity extends AppCompatActivity {
 }
 
     private void sendUserToNextActivity() {
-        Intent intent=new Intent(RegisterActivity.this,MainActivity.class);
+        Intent intent=new Intent(RegisterActivity.this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK |Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }

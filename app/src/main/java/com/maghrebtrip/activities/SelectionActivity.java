@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.maghrebtrip.R;
+import com.maghrebtrip.activities.plans.PlansActivity;
 import com.maghrebtrip.databinding.ActivitySelectionBinding;
 
 import androidx.appcompat.app.AlertDialog;
