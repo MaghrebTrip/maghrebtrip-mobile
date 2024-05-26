@@ -1,16 +1,11 @@
 package com.maghrebtrip.activities;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.android.gms.auth.api.identity.BeginSignInRequest;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -18,6 +13,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 import com.maghrebtrip.R;
+import com.maghrebtrip.activities.main.MainActivity;
 
 public class GoogleSignInActivity extends LoginActivity {
 
@@ -64,7 +60,7 @@ public class GoogleSignInActivity extends LoginActivity {
     }
     void navigateToSecondActivity(){
         finish();
-        Intent intent=new Intent(GoogleSignInActivity.this,MainActivity.class);
+        Intent intent=new Intent(GoogleSignInActivity.this, MainActivity.class);
         startActivity(intent);
     }
 }

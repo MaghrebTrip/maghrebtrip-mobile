@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +19,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.maghrebtrip.R;
+import com.maghrebtrip.activities.main.MainActivity;
 
 public class LoginActivity extends AppCompatActivity {
     TextView createNewAccount;
@@ -94,7 +94,7 @@ public class LoginActivity extends AppCompatActivity {
 }
 
     private void sendUserToNextActivity() {
-        Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+        Intent intent=new Intent(LoginActivity.this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK |Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }

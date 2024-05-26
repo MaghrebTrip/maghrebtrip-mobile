@@ -1,4 +1,4 @@
-package com.maghrebtrip.activities;
+package com.maghrebtrip.activities.plans;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.maghrebtrip.R;
+import com.maghrebtrip.activities.MapsActivity;
 import com.maghrebtrip.adapters.AttractionAdapter;
 import com.maghrebtrip.models.Attraction;
 import com.maghrebtrip.models.Plan;
@@ -29,14 +30,14 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PlanFragment1 extends Fragment {
+public class SecondPlanFragment extends Fragment {
     private List<Attraction> attractions = new ArrayList<>();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-        View rootView = inflater.inflate(R.layout.fragment_plan1, container, false);
-        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.plan1AttractionList);
+        View rootView = inflater.inflate(R.layout.fragment_plan2, container, false);
+        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.plan2AttractionList);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         RetrofitService retrofitService = new RetrofitService(8083);
@@ -49,13 +50,12 @@ public class PlanFragment1 extends Fragment {
             cityId = args.getInt("cityId");
         }
 
-
         planApi.getPlansByCity(cityId).enqueue(new Callback<List<Plan>>() {
             @Override
             public void onResponse(Call<List<Plan>> call, Response<List<Plan>> response) {
                 List<Plan> plans = response.body();
                 if (plans != null) {
-                    attractions = plans.get(0).getAttractions();
+                    attractions = plans.get(1).getAttractions();
                     AttractionAdapter adapter = new AttractionAdapter(attractions);
                     recyclerView.setAdapter(adapter);
                     Toast.makeText(getActivity(), "Plans loaded successfully!", Toast.LENGTH_SHORT).show();
