@@ -1,7 +1,6 @@
 package com.maghrebtrip.adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
@@ -11,10 +10,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners;
-import com.maghrebtrip.activities.DetailsActivity;
-import com.maghrebtrip.activities.PlanFragment1;
 import com.maghrebtrip.databinding.ViewholderAttractionListBinding;
 import com.maghrebtrip.models.Attraction;
 import com.maghrebtrip.models.Schedule;
