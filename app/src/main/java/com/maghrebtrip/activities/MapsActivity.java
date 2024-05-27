@@ -7,7 +7,6 @@ import androidx.fragment.app.FragmentActivity;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.location.Location;
 import android.os.Bundle;
 import android.view.Window;
 import android.widget.Toast;
@@ -24,15 +23,8 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import com.maghrebtrip.R;
 import com.maghrebtrip.databinding.ActivityMapsBinding;
 import com.maghrebtrip.models.Attraction;
-import com.maghrebtrip.utils.LocationParser;
+import com.maghrebtrip.models.CustomAttraction;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,6 +72,49 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+
+        List<CustomAttraction> attractions = new ArrayList<>();
+
+        for (int i = 0; i < 3; i++) {
+            if (getIntent().hasExtra("attraction_"+i)) {
+                attractions.add((CustomAttraction) getIntent().getSerializableExtra("attraction_"+i));
+            } else {
+                Toast.makeText(MapsActivity.this, "Attraction " + i + " not found", Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        List<LatLng> coordinatesList = new ArrayList<>();
+        for (CustomAttraction attraction : attractions) {
+            String location = attraction.getLocation();
+            String[] coordinates = location.split(", ");
+            double latitude = Double.parseDouble(coordinates[0]);
+            double longitude = Double.parseDouble(coordinates[1]);
+            LatLng latLng = new LatLng(latitude, longitude);
+            Marker marker;
+            marker = mMap.addMarker(new MarkerOptions()
+                    .position(latLng)
+                    .title(attraction.getName()));
+            marker.setTag(0);
+            coordinatesList.add(latLng);
+        }
+
+        PolylineOptions polylineOptions = new PolylineOptions()
+                .add(coordinatesList.get(0))
+                .add(coordinatesList.get(1))
+                .add(coordinatesList.get(2))
+                .color(Color.RED);
+        mMap.addPolyline(polylineOptions);
+
+        // mMap.moveCamera(CameraUpdateFactory.newLatLng(coordinatesList.get(0)));
+
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(
+                coordinatesList.get(0), 16f);
+        mMap.animateCamera(cameraUpdate);
+    }
+
 //    private void getRoutes() throws IOException {
 //        String originLat = "34.0258769";
 //        String originLng = "-6.8260299";
@@ -103,42 +138,4 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //        }
 //        reader.close();
 //    }
-
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-
-        List<Attraction> attractions = new ArrayList<>();
-        if (getIntent().hasExtra("attractions")) {
-            attractions = (List<Attraction>) getIntent().getSerializableExtra("attractions");
-        } else {
-            Toast.makeText(MapsActivity.this, "Attractions not found", Toast.LENGTH_SHORT).show();
-        }
-
-        List<LatLng> coordinatesList = new ArrayList<>();
-        for (Attraction attraction : attractions) {
-            String location = attraction.getLocation();
-            double[] coordinates = LocationParser.parseLocation(location);
-            LatLng latLng = new LatLng(coordinates[0], coordinates[1]);
-            Marker marker;
-            marker = mMap.addMarker(new MarkerOptions()
-                    .position(latLng)
-                    .title(attraction.getName()));
-            marker.setTag(0);
-            coordinatesList.add(latLng);
-        }
-
-        PolylineOptions polylineOptions = new PolylineOptions()
-                .add(coordinatesList.get(0))
-                .add(coordinatesList.get(1))
-                .add(coordinatesList.get(2))
-                .color(Color.RED);
-        mMap.addPolyline(polylineOptions);
-
-        // mMap.moveCamera(CameraUpdateFactory.newLatLng(coordinatesList.get(0)));
-
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(
-                coordinatesList.get(0), 16f);
-        mMap.animateCamera(cameraUpdate);
-    }
 }

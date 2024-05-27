@@ -15,6 +15,8 @@ import com.maghrebtrip.models.Attraction;
 import com.maghrebtrip.models.Schedule;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class AttractionAdapter extends RecyclerView.Adapter<AttractionAdapter.Viewholder> {
     List<Attraction> items;
@@ -35,6 +37,7 @@ public class AttractionAdapter extends RecyclerView.Adapter<AttractionAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull AttractionAdapter.Viewholder holder, int position) {
+
         binding.attractionName.setText(items.get(position).getName());
 
         String imageData = items.get(position).getImage();
@@ -46,7 +49,7 @@ public class AttractionAdapter extends RecyclerView.Adapter<AttractionAdapter.Vi
         List<Schedule> schedules = items.get(position).getSchedules();
         binding.attractionOpeningHours.setText(
                 //String.format("%s: %s -> %s", schedules.get(0).getDayOfWeek(), schedules.get(0).getStartTime(), schedules.get(0).getEndTime())
-                String.format("%s: %s -> %s", "Monday", "09h00", "16h00")
+                String.format("From %s to %s", "09h00", "16h00")
         );
 
     }

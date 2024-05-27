@@ -25,7 +25,6 @@
             android:name=".activities.LoginActivity"
             android:exported="true">
         </activity>
-
         <activity
             android:name=".activities.RegisterActivity"
             android:exported="true"/>
@@ -40,8 +39,18 @@
         </activity>
 
         <activity
-            android:name=".activities.DetailsActivity"
+            android:name=".activities.details.CityDetailsActivity"
             android:exported="true"/>
+        <activity
+            android:name=".activities.details.HotelDetailsActivity"
+            android:exported="true"/>
+        <activity
+            android:name=".activities.details.RestaurantDetailsActivity"
+            android:exported="true"/>
+        <activity
+            android:name=".activities.details.MonumentDetailsActivity"
+            android:exported="true"/>
+
         <activity
             android:name=".activities.SelectionActivity"
             android:exported="true"/>
@@ -49,7 +58,6 @@
         <activity
             android:name=".activities.plans.PlansActivity"
             android:exported="true"/>
-
 
         <activity
             android:name=".activities.MapsActivity"

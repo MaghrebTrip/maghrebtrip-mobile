@@ -16,13 +16,16 @@ import com.maghrebtrip.R;
 import com.maghrebtrip.activities.MapsActivity;
 import com.maghrebtrip.adapters.AttractionAdapter;
 import com.maghrebtrip.models.Attraction;
+import com.maghrebtrip.models.CustomAttraction;
 import com.maghrebtrip.models.Plan;
 import com.maghrebtrip.retrofit.PlanApi;
 import com.maghrebtrip.retrofit.RetrofitService;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -76,7 +79,21 @@ public class FirstPlanFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), MapsActivity.class);
-                intent.putExtra("attractions", (Serializable) attractions);
+                for (int i = 0; i < attractions.size(); i++) {
+                    Attraction attraction = attractions.get(i);
+                    CustomAttraction customAttraction = new CustomAttraction(
+                            attraction.getId(),
+                            attraction.getCityId(),
+                            attraction.getName(),
+                            attraction.getType(),
+                            attraction.getDescription(),
+                            attraction.getSchedules(),
+                            attraction.getLocation(),
+                            attraction.getRating(),
+                            attraction.getSponsored()
+                    );
+                    intent.putExtra("attraction_"+i, customAttraction);
+                }
                 startActivity(intent);
             }
         });

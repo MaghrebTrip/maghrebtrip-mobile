@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
                         Tourist tourist = response.body();
                         if (tourist != null) {
                             TextView textView = findViewById(R.id.welcomeTextView);
-                            textView.setText(String.format("%s %s", tourist.getFirstName(), tourist.getLastName()));
+                            textView.setText(String.format("Hey %s,", tourist.getFirstName()));
                             Toast.makeText(MainActivity.this, String.format("Welcome %s !", tourist.getFirstName()), Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(MainActivity.this, "Empty data", Toast.LENGTH_SHORT).show();

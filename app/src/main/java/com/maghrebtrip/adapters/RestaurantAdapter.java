@@ -1,6 +1,7 @@
 package com.maghrebtrip.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.maghrebtrip.activities.details.RestaurantDetailsActivity;
 import com.maghrebtrip.databinding.ViewholderRestaurantsListBinding;
 import com.maghrebtrip.models.Restaurant;
 
@@ -21,7 +23,7 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
     ViewholderRestaurantsListBinding binding;
 
     public RestaurantAdapter(List<Restaurant> items) {
-        this.items = items.subList(0, 10);
+        this.items = items.subList(0, 3); // just 3 items
     }
 
     @NonNull
@@ -42,13 +44,13 @@ public class RestaurantAdapter extends RecyclerView.Adapter<RestaurantAdapter.Vi
 
         binding.restaurantImage.setImageBitmap(decodedBitmap);
 
-        binding.restaurantRating.setText(items.get(position).getRating()+"");
+        binding.restaurantRating.setText(String.format("%s", items.get(position).getRating()));
 
-//        holder.itemView.setOnClickListener(v -> {
-//            Intent intent = new Intent(context, DetailsActivity.class);
-//            intent.putExtra("object", items.get(position));
-//            context.startActivity(intent);
-//        });
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, RestaurantDetailsActivity.class);
+            intent.putExtra("object", items.get(position));
+            context.startActivity(intent);
+        });
 
     }
 

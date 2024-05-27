@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.maghrebtrip.activities.DetailsActivity;
+import com.maghrebtrip.activities.details.HotelDetailsActivity;
 import com.maghrebtrip.databinding.ViewholderHotelsListBinding;
 import com.maghrebtrip.models.Hotel;
 
@@ -23,7 +23,7 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.Viewholder> 
     ViewholderHotelsListBinding binding;
 
     public HotelAdapter(List<Hotel> items) {
-        this.items = items.subList(0, 10);
+        this.items = items.subList(0, 3); // just 3 items
     }
 
     @NonNull
@@ -44,13 +44,13 @@ public class HotelAdapter extends RecyclerView.Adapter<HotelAdapter.Viewholder> 
 
         binding.hotelImage.setImageBitmap(decodedBitmap);
 
-        binding.hotelRating.setText(items.get(position).getRating()+"");
+        binding.hotelRating.setText(String.format("%s", items.get(position).getRating()));
 
-//        holder.itemView.setOnClickListener(v -> {
-//            Intent intent = new Intent(context, DetailsActivity.class);
-//            intent.putExtra("object", items.get(position));
-//            context.startActivity(intent);
-//        });
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, HotelDetailsActivity.class);
+            intent.putExtra("object", items.get(position));
+            context.startActivity(intent);
+        });
 
     }
 

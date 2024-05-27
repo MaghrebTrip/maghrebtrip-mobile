@@ -10,9 +10,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners;
-import com.maghrebtrip.activities.DetailsActivity;
+import com.maghrebtrip.activities.details.CityDetailsActivity;
 import com.maghrebtrip.models.City;
 import com.maghrebtrip.databinding.ViewholderCitiesListBinding;
 
@@ -25,7 +23,7 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.Viewholder> {
     ViewholderCitiesListBinding binding;
 
     public CityAdapter(List<City> items) {
-        this.items = items;
+        this.items = items.subList(0, 5); // just 5 items
     }
 
     @NonNull
@@ -46,10 +44,10 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.Viewholder> {
 
         binding.cityImage.setImageBitmap(decodedBitmap);
 
-        binding.cityRating.setText(items.get(position).getRating()+"");
+        binding.cityRating.setText(String.format("%s", items.get(position).getRating()));
 
         holder.itemView.setOnClickListener(v -> {
-            Intent intent = new Intent(context, DetailsActivity.class);
+            Intent intent = new Intent(context, CityDetailsActivity.class);
             intent.putExtra("object", items.get(position));
             context.startActivity(intent);
         });
