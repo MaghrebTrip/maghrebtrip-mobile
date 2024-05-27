@@ -1,5 +1,7 @@
 package com.maghrebtrip.activities;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
@@ -7,8 +9,11 @@ import androidx.fragment.app.FragmentActivity;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.nfc.Tag;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -28,13 +33,47 @@ import com.maghrebtrip.models.CustomAttraction;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends FragmentActivity implements
+        OnMapReadyCallback,
+        GoogleMap.OnInfoWindowClickListener {
 
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
 
     private final static int LOCATION_REQUEST_CODE = 23;
     boolean locationPermission = false;
+
+    class MapsInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
+
+        private final View mWindow;
+
+        MapsInfoWindowAdapter() {
+            mWindow = getLayoutInflater().inflate(R.layout.maps_info_window, null);
+        }
+
+        @Nullable
+        @Override
+        public View getInfoContents(@NonNull Marker marker) {
+            CustomAttraction attraction = (CustomAttraction) marker.getTag();
+            if (attraction != null) {
+                TextView attractionName = mWindow.findViewById(R.id.attractionName);
+                attractionName.setText(attraction.getName());
+                TextView attractionType = mWindow.findViewById(R.id.attractionType);
+                attractionType.setText(attraction.getType());
+                TextView attractionRating = mWindow.findViewById(R.id.attractionRating);
+                attractionRating.setText(String.format("%s", attraction.getRating()));
+                TextView attractionOpeningHours = mWindow.findViewById(R.id.attractionOpeningHours);
+                attractionOpeningHours.setText(String.format("%s - %s", "09:00", "16:00"));
+            }
+            return mWindow;
+        }
+
+        @Nullable
+        @Override
+        public View getInfoWindow(@NonNull Marker marker) {
+            return null;
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,10 +133,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             double longitude = Double.parseDouble(coordinates[1]);
             LatLng latLng = new LatLng(latitude, longitude);
             Marker marker;
-            marker = mMap.addMarker(new MarkerOptions()
-                    .position(latLng)
-                    .title(attraction.getName()));
-            marker.setTag(0);
+            marker = mMap.addMarker(new MarkerOptions().position(latLng));
+            assert marker != null;
+            marker.setTag(attraction);
             coordinatesList.add(latLng);
         }
 
@@ -108,11 +146,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .color(Color.RED);
         mMap.addPolyline(polylineOptions);
 
-        // mMap.moveCamera(CameraUpdateFactory.newLatLng(coordinatesList.get(0)));
-
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(
                 coordinatesList.get(0), 16f);
         mMap.animateCamera(cameraUpdate);
+
+        mMap.setInfoWindowAdapter(new MapsInfoWindowAdapter());
+
+        mMap.setOnInfoWindowClickListener(this);
+    }
+
+    @Override
+    public void onInfoWindowClick(Marker marker) {
+        Toast.makeText(this, "Info window clicked",
+                Toast.LENGTH_SHORT).show();
     }
 
 //    private void getRoutes() throws IOException {
