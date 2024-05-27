@@ -23,5 +23,14 @@
     <string name="attraction_opening_hours">All day at: 15h-17h</string>
     <string name="title_activity_maps">MapsActivity</string>
     <string name="explore_subtitle">Explore the world of Morocco</string>
-    <string name="username">username</string>
+    <string name="username">Ahmed</string>
+    <string name="hotel_name">Hotel Farah</string>
+    <string name="hotel_rating">4.6</string>
+    <string name="hotel_description">Lorem ipsum dolar lorem ipsum dolar lorem ipsum dolar lorem ipsum dolar. Lorem ipsum dolar lorem ipsum dolar lorem ipsum dolar lorem ipsum dolar. Lorem ipsum dolar lorem ipsum dolar lorem ipsum dolar lorem ipsum dolar.</string>
+    <string name="monument_name">Hassan Tower</string>
+    <string name="monument_rating">4.8</string>
+    <string name="monument_description">Lorem ipsum dolar lorem ipsum dolar lorem ipsum dolar lorem ipsum dolar. Lorem ipsum dolar lorem ipsum dolar lorem ipsum dolar lorem ipsum dolar. Lorem ipsum dolar lorem ipsum dolar lorem ipsum dolar lorem ipsum dolar.</string>
+    <string name="restaurant_name">The View</string>
+    <string name="restaurant_rating">4.8</string>
+    <string name="restaurant_description">Lorem ipsum dolar lorem ipsum dolar lorem ipsum dolar lorem ipsum dolar. Lorem ipsum dolar lorem ipsum dolar lorem ipsum dolar lorem ipsum dolar. Lorem ipsum dolar lorem ipsum dolar lorem ipsum dolar lorem ipsum dolar.</string>
 </resources>

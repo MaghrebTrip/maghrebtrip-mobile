@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#FF000000</color>
+    <color name="gradientBlackStart">#43000000</color>
+    <color name="gradientBlackCenter">#22000000</color>
+    <color name="gradientBlackEnd">#00000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="cornel_red">#AD151B</color>
     <color name="red">#EF2D2D</color>
