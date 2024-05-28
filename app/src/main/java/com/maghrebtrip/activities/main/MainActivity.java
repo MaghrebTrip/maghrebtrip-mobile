@@ -35,10 +35,12 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    String userEmail; //idrissiahmed2002@gmail.com
+    String userEmail;
 
     Properties properties = new Properties();
     int touristApiPort = Integer.parseInt(properties.getProperty("TOURIST_API_PORT", "8080"));
+    RetrofitService retrofitService = new RetrofitService(touristApiPort);
+    TouristApi touristApi = retrofitService.getRetrofit().create(TouristApi.class);
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -66,32 +68,38 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getTourist() {
-        RetrofitService retrofitService = new RetrofitService(touristApiPort);
-        TouristApi touristApi = retrofitService.getRetrofit().create(TouristApi.class);
-
         if (!userEmail.equals("")) {
             touristApi.getTouristByEmail(userEmail).enqueue(
-                    new Callback<Tourist>() {
-                        @Override
-                        public void onResponse(Call<Tourist> call, Response<Tourist> response) {
-                            Tourist tourist = response.body();
-                            if (tourist != null) {
-                                // Set the username
-                                TextView textView = findViewById(R.id.userName);
-                                textView.setText(String.format("Hey %s,", tourist.getFirstName()));
+                new Callback<Tourist>() {
+                    @Override
+                    public void onResponse(Call<Tourist> call, Response<Tourist> response) {
+                        Tourist tourist = response.body();
+                        if (tourist != null) {
+                            // Store the tourist info
+                            SharedPreferences sharedPreferences = getSharedPreferences("appUser", MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putInt("id", tourist.getId());
+                            editor.putString("firstName", tourist.getFirstName());
+                            editor.putString("lastName", tourist.getLastName());
+                            editor.putString("nationality", tourist.getNationality());
+                            editor.apply();
 
-                                Toast.makeText(MainActivity.this, String.format("Welcome %s !", tourist.getFirstName()), Toast.LENGTH_SHORT).show();
-                            } else {
-                                Toast.makeText(MainActivity.this, "Empty data", Toast.LENGTH_SHORT).show();
-                            }
-                        }
+                            // Set the username
+                            TextView textView = findViewById(R.id.userName);
+                            textView.setText(String.format("Hey %s,", tourist.getFirstName()));
 
-                        @Override
-                        public void onFailure(Call<Tourist> call, Throwable t) {
-                            Toast.makeText(MainActivity.this, "Failed to load tourist!", Toast.LENGTH_SHORT).show();
-                            Logger.getLogger(MainActivity.class.getName()).log(Level.SEVERE, "Error occurred", t);
+                            Toast.makeText(MainActivity.this, String.format("Welcome %s !", tourist.getFirstName()), Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(MainActivity.this, "Empty data", Toast.LENGTH_SHORT).show();
                         }
                     }
+
+                    @Override
+                    public void onFailure(Call<Tourist> call, Throwable t) {
+                        Toast.makeText(MainActivity.this, "Failed to load tourist!", Toast.LENGTH_SHORT).show();
+                        Logger.getLogger(MainActivity.class.getName()).log(Level.SEVERE, "Error occurred", t);
+                    }
+                }
             );
         } else {
             Toast.makeText(MainActivity.this, "User not found!", Toast.LENGTH_SHORT).show();

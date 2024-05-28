@@ -1,6 +1,5 @@
 package com.maghrebtrip.models;
 
-import java.time.LocalDateTime;
 
 public class Feedback {
     private Integer id;
@@ -9,10 +8,10 @@ public class Feedback {
     private String attractionType;
     private float rating;
     private String comment;
-    private LocalDateTime date;
-    private boolean edited = false;
+    private String date;
+    private boolean edited;
 
-    public Feedback(Integer id, Integer touristId, Integer attractionId, String attractionType, float rating, String comment, LocalDateTime date, boolean edited) {
+    public Feedback(Integer id, Integer touristId, Integer attractionId, String attractionType, float rating, String comment, String date, boolean edited) {
         this.id = id;
         this.touristId = touristId;
         this.attractionId = attractionId;
@@ -23,16 +22,12 @@ public class Feedback {
         this.edited = edited;
     }
 
-    public Feedback(Integer touristId, Integer attractionId, String attractionType, float rating, String comment) {
-        this.touristId = touristId;
-        this.attractionId = attractionId;
-        this.attractionType = attractionType;
-        this.rating = rating;
-        this.comment = comment;
-    }
-
     public Integer getId() {
         return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Integer getTouristId() {
@@ -75,11 +70,19 @@ public class Feedback {
         this.comment = comment;
     }
 
-    public LocalDateTime getDate() {
+    public String getDate() {
         return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public boolean isEdited() {
         return edited;
+    }
+
+    public void setEdited(boolean edited) {
+        this.edited = edited;
     }
 }

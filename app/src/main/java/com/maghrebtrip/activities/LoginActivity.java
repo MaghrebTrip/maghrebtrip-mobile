@@ -75,30 +75,29 @@ public class LoginActivity extends AppCompatActivity {
         String password=inputPassword.getText().toString();
         boolean rememberMe=rememberMeBox.isChecked();
 
-        if(!email.matches(emailPattern))
-        {
+        if(!email.matches(emailPattern)) {
             inputEmail.setError("Enter Correct Email!");
-
-        }else if(password.isEmpty() || password.length()<5){
+        } else if (password.isEmpty() || password.length()<5){
             inputPassword.setError("Enter proper password!");
-        }else{
-        mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
-                    SharedPreferences sharedPreferences = getSharedPreferences("appUser", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putString("email", email);
-                    editor.putString("password", password);
-                    editor.putBoolean("rememberMe", rememberMe);
-                    editor.apply();
-                    Toast.makeText(LoginActivity.this, "Login successful ", Toast.LENGTH_SHORT).show();
-                    sendUserToNextActivity();
-                }else{
-                    Toast.makeText(LoginActivity.this, "Incorrect Email or password", Toast.LENGTH_SHORT).show();
+        } else {
+            // TODO: sign in using our auth microservice
+            mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if(task.isSuccessful()){
+                        SharedPreferences sharedPreferences = getSharedPreferences("appUser", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("email", email);
+                        editor.putString("password", password);
+                        editor.putBoolean("rememberMe", rememberMe);
+                        editor.apply();
+                        Toast.makeText(LoginActivity.this, "Login successful ", Toast.LENGTH_SHORT).show();
+                        sendUserToNextActivity();
+                    }else{
+                        Toast.makeText(LoginActivity.this, "Incorrect Email or password", Toast.LENGTH_SHORT).show();
+                    }
                 }
-            }
-        });
+            });
     }
 }
 

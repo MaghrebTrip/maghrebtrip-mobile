@@ -85,6 +85,7 @@ public class RegisterActivity extends AppCompatActivity {
         } else if (!password.equals(ConfirmPassword)) {
            inputConfirmPassword.setError("Password not matching!");
         } else {
+            // TODO: register the new user using our auth microservice
             mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {

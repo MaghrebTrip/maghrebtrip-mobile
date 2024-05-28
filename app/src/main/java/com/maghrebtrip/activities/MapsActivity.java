@@ -164,28 +164,4 @@ public class MapsActivity extends FragmentActivity implements
         intent.putExtra("attractionType", attractionType);
         startActivity(intent);
     }
-
-//    private void getRoutes() throws IOException {
-//        String originLat = "34.0258769";
-//        String originLng = "-6.8260299";
-//        String destLat = "34.0222944";
-//        String destLng = "-6.8301424";
-//        String API_KEY = "";
-//
-//        String url = "https://maps.googleapis.com/maps/api/directions/json?"
-//                + "origin=" + originLat + "," + originLng
-//                + "&destination=" + destLat + "," + destLng
-//                + "&key=" + API_KEY;
-//
-//        HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
-//        InputStream inputStream = connection.getInputStream();
-//
-//        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-//        StringBuilder response = new StringBuilder();
-//        String line;
-//        while ((line = reader.readLine()) != null) {
-//            response.append(line);
-//        }
-//        reader.close();
-//    }
 }
