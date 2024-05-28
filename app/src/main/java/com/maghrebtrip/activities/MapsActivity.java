@@ -7,9 +7,9 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -27,7 +27,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.maghrebtrip.R;
 import com.maghrebtrip.databinding.ActivityMapsBinding;
-import com.maghrebtrip.models.Attraction;
 import com.maghrebtrip.models.CustomAttraction;
 
 import java.util.ArrayList;
@@ -157,8 +156,13 @@ public class MapsActivity extends FragmentActivity implements
 
     @Override
     public void onInfoWindowClick(Marker marker) {
-        Toast.makeText(this, "Info window clicked",
-                Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(MapsActivity.this, FeedbacksActivity.class);
+        CustomAttraction attraction = (CustomAttraction) marker.getTag();
+        Integer attractionId = attraction.getId();
+        String attractionType = attraction.getType();
+        intent.putExtra("attractionId", attractionId);
+        intent.putExtra("attractionType", attractionType);
+        startActivity(intent);
     }
 
 //    private void getRoutes() throws IOException {
