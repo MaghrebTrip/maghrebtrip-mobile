@@ -74,6 +74,36 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="50dp"
                     android:alpha="0.7"
+                    android:text="First Name"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/inputFirstName"
+                    android:drawableEnd="@drawable/done_icon"
+                    android:inputType="textPersonName" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp"
+                    android:alpha="0.7"
+                    android:text="Last Name"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/inputLastName"
+                    android:drawableEnd="@drawable/done_icon"
+                    android:inputType="textPersonName" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp"
+                    android:alpha="0.7"
                     android:text="Email Address"
                     android:textStyle="bold" />
 
