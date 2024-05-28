@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.signin.internal.Storage;
 import com.google.android.material.tabs.TabLayout;
 import com.maghrebtrip.R;
 import com.maghrebtrip.adapters.VPAdapter;
@@ -33,7 +35,7 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    String touristEmail = "idrissiahmed2002@gmail.com";
+    String userEmail; //idrissiahmed2002@gmail.com
 
     Properties properties = new Properties();
     int touristApiPort = Integer.parseInt(properties.getProperty("TOURIST_API_PORT", "8080"));
@@ -48,6 +50,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        // Get the user email from SharedPreferences
+        SharedPreferences sharedPreferences = getSharedPreferences("appUser", MODE_PRIVATE);
+        userEmail = sharedPreferences.getString("email", "");
+
         statusBarColor();
         getTourist();
         getBundles();
@@ -62,27 +69,33 @@ public class MainActivity extends AppCompatActivity {
         RetrofitService retrofitService = new RetrofitService(touristApiPort);
         TouristApi touristApi = retrofitService.getRetrofit().create(TouristApi.class);
 
-        touristApi.getTouristByEmail(touristEmail).enqueue(
-                new Callback<Tourist>() {
-                    @Override
-                    public void onResponse(Call<Tourist> call, Response<Tourist> response) {
-                        Tourist tourist = response.body();
-                        if (tourist != null) {
-                            TextView textView = findViewById(R.id.welcomeTextView);
-                            textView.setText(String.format("Hey %s,", tourist.getFirstName()));
-                            Toast.makeText(MainActivity.this, String.format("Welcome %s !", tourist.getFirstName()), Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(MainActivity.this, "Empty data", Toast.LENGTH_SHORT).show();
+        if (!userEmail.equals("")) {
+            touristApi.getTouristByEmail(userEmail).enqueue(
+                    new Callback<Tourist>() {
+                        @Override
+                        public void onResponse(Call<Tourist> call, Response<Tourist> response) {
+                            Tourist tourist = response.body();
+                            if (tourist != null) {
+                                // Set the username
+                                TextView textView = findViewById(R.id.userName);
+                                textView.setText(String.format("Hey %s,", tourist.getFirstName()));
+
+                                Toast.makeText(MainActivity.this, String.format("Welcome %s !", tourist.getFirstName()), Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(MainActivity.this, "Empty data", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Tourist> call, Throwable t) {
+                            Toast.makeText(MainActivity.this, "Failed to load tourist!", Toast.LENGTH_SHORT).show();
+                            Logger.getLogger(MainActivity.class.getName()).log(Level.SEVERE, "Error occurred", t);
                         }
                     }
-
-                    @Override
-                    public void onFailure(Call<Tourist> call, Throwable t) {
-                        Toast.makeText(MainActivity.this, "Failed to load tourist!", Toast.LENGTH_SHORT).show();
-                        Logger.getLogger(MainActivity.class.getName()).log(Level.SEVERE, "Error occurred", t);
-                    }
-                }
-        );
+            );
+        } else {
+            Toast.makeText(MainActivity.this, "User not found!", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void getBundles() {

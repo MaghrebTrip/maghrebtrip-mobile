@@ -1,10 +1,12 @@
 package com.maghrebtrip.activities;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -21,9 +23,13 @@ import com.google.firebase.auth.FirebaseUser;
 import com.maghrebtrip.R;
 import com.maghrebtrip.activities.main.MainActivity;
 
+import java.util.Objects;
+
 public class LoginActivity extends AppCompatActivity {
     TextView createNewAccount;
-    EditText inputEmail,inputPassword;
+    EditText inputEmail, inputPassword;
+    CheckBox rememberMeBox;
+    boolean rememberMe;
     Button btnLogin;
     String emailPattern= "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     ProgressBar progressBar;
@@ -39,34 +45,35 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+        // Get the rememberMe from SharedPreferences
+        SharedPreferences sharedPreferences = getSharedPreferences("appUser", MODE_PRIVATE);
+        rememberMe = sharedPreferences.getBoolean("rememberMe", false);
+
         inputEmail=findViewById(R.id.inputEmail);
         inputPassword=findViewById(R.id.inputPassword);
+        rememberMeBox=findViewById(R.id.rememberMeBox);
         createNewAccount=findViewById(R.id.createNewAccount);
         btnLogin=findViewById(R.id.btnLogin);
         progressBar=new ProgressBar(this);
         mAuth=FirebaseAuth.getInstance();
         mUser=mAuth.getCurrentUser();
 
-        createNewAccount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this,RegisterActivity.class));
+        if (rememberMe && mUser!=null) {
+            String userEmail = sharedPreferences.getString("email", "");
+            if(Objects.equals(mUser.getEmail(), userEmail)) {
+                sendUserToNextActivity();
             }
-        });
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PerforLogin();
-
-            }
-        });
-
+        } else {
+            createNewAccount.setOnClickListener(v -> startActivity(new Intent(LoginActivity.this, RegisterActivity.class)));
+            btnLogin.setOnClickListener(v -> PerformLogin());
+        }
         
     }
 
-    private void PerforLogin() {
+    private void PerformLogin() {
         String email=inputEmail.getText().toString();
         String password=inputPassword.getText().toString();
+        boolean rememberMe=rememberMeBox.isChecked();
 
         if(!email.matches(emailPattern))
         {
@@ -75,22 +82,24 @@ public class LoginActivity extends AppCompatActivity {
         }else if(password.isEmpty() || password.length()<5){
             inputPassword.setError("Enter proper password!");
         }else{
-            mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if(task.isSuccessful()){
-                        Toast.makeText(LoginActivity.this, "Login successful ", Toast.LENGTH_SHORT).show();
-                        sendUserToNextActivity();
-
-                    }else{
-                        Toast.makeText(LoginActivity.this, "Incorrect Email or password", Toast.LENGTH_SHORT).show();
-                    }
+        mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()){
+                    SharedPreferences sharedPreferences = getSharedPreferences("appUser", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("email", email);
+                    editor.putString("password", password);
+                    editor.putBoolean("rememberMe", rememberMe);
+                    editor.apply();
+                    Toast.makeText(LoginActivity.this, "Login successful ", Toast.LENGTH_SHORT).show();
+                    sendUserToNextActivity();
+                }else{
+                    Toast.makeText(LoginActivity.this, "Incorrect Email or password", Toast.LENGTH_SHORT).show();
                 }
-            });
-
+            }
+        });
     }
-
-
 }
 
     private void sendUserToNextActivity() {

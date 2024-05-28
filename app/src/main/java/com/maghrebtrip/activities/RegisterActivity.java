@@ -24,7 +24,7 @@ import com.maghrebtrip.activities.main.MainActivity;
 
 public class RegisterActivity extends AppCompatActivity {
     TextView alreadyHaveaccount;
-    EditText inputEmail,inputPassword,inputConfirmPassword;
+    EditText inputFirstName, inputLastName, inputEmail, inputPassword, inputConfirmPassword;
     Button btnRegister;
     String emailPattern= "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     ProgressBar progressBar;
@@ -40,6 +40,8 @@ public class RegisterActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         alreadyHaveaccount=findViewById(R.id.alreadyHaveaccount);
+        inputFirstName=findViewById(R.id.inputFirstName);
+        inputLastName=findViewById(R.id.inputLastName);
         inputEmail=findViewById(R.id.inputEmail);
         inputPassword=findViewById(R.id.inputPassword);
         inputConfirmPassword=findViewById(R.id.inputConfirmPassword);
@@ -57,46 +59,45 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PerforAuth();
+                PerformAuth();
 
             }
         });
 
-
-
-
     }
 
-    private void PerforAuth() {
+    private void PerformAuth() {
+
+        String firstName=inputFirstName.getText().toString();
+        String lastName=inputLastName.getText().toString();
         String email=inputEmail.getText().toString();
         String password=inputPassword.getText().toString();
         String ConfirmPassword=inputConfirmPassword.getText().toString();
 
-        if(!email.matches(emailPattern))
-        {
+        if (firstName.isEmpty()) {
+            inputFirstName.setError("First name is required");
+        } else if (lastName.isEmpty()) {
+            inputFirstName.setError("Last name is required");
+        } else if (!email.matches(emailPattern)) {
             inputEmail.setError("Enter Correct Email Format!");
-
-        }else if(password.isEmpty() || password.length()<5){
+        } else if (password.isEmpty() || password.length()<5){
             inputPassword.setError("Enter proper password!");
-        }else if (!password.equals(ConfirmPassword)) {
+        } else if (!password.equals(ConfirmPassword)) {
            inputConfirmPassword.setError("Password not matching!");
-        }else{
+        } else {
             mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
-
                         Toast.makeText(RegisterActivity.this, "Registration successful ", Toast.LENGTH_SHORT).show();
                         sendUserToNextActivity();
                 }else{
-                        Toast.makeText(RegisterActivity.this, ""+task.getException(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterActivity.this, String.format("%s", task.getException()), Toast.LENGTH_SHORT).show();
                 }
                 }
             });
+        }
     }
-
-
-}
 
     private void sendUserToNextActivity() {
         Intent intent=new Intent(RegisterActivity.this, MainActivity.class);

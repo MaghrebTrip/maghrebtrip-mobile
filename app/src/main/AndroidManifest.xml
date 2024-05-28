@@ -2,9 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -15,55 +15,58 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MaghrebTrip"
         android:usesCleartextTraffic="true"
-        tools:targetApi="31"> <!-- usesCleartextTraffic to bypass https -->
-
+        tools:targetApi="31">
+        <activity
+            android:name=".activities.FeedbacksActivity"
+            android:exported="false" />
+        <!-- usesCleartextTraffic to bypass https -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCbvSyiejGY5dJY2s_SA-U_4Cv4ocmpq0Y"/>
+            android:value="AIzaSyCbvSyiejGY5dJY2s_SA-U_4Cv4ocmpq0Y" />
 
         <activity
             android:name=".activities.LoginActivity"
             android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".activities.RegisterActivity"
-            android:exported="true"/>
+            android:exported="true" />
 
         <activity
             android:name=".activities.main.MainActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <activity
             android:name=".activities.details.CityDetailsActivity"
-            android:exported="true"/>
+            android:exported="true" />
         <activity
             android:name=".activities.details.HotelDetailsActivity"
-            android:exported="true"/>
+            android:exported="true" />
         <activity
             android:name=".activities.details.RestaurantDetailsActivity"
-            android:exported="true"/>
+            android:exported="true" />
         <activity
             android:name=".activities.details.MonumentDetailsActivity"
-            android:exported="true"/>
+            android:exported="true" />
 
         <activity
             android:name=".activities.SelectionActivity"
-            android:exported="true"/>
+            android:exported="true" />
 
         <activity
             android:name=".activities.plans.PlansActivity"
-            android:exported="true"/>
+            android:exported="true" />
 
         <activity
             android:name=".activities.MapsActivity"
             android:exported="true"
             android:label="@string/title_activity_maps" />
-
     </application>
 
 </manifest>
