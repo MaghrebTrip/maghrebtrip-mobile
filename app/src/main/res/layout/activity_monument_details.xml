@@ -49,6 +49,7 @@
 
                 <ImageView
                     android:id="@+id/monumentImageDetails"
+                    android:layout_marginTop="16dp"
                     android:layout_width="0dp"
                     android:layout_height="240dp"
                     android:src="@drawable/rabat"

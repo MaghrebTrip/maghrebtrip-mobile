@@ -54,6 +54,8 @@ public class FeedbacksActivity extends AppCompatActivity {
         getFeedbacks();
 
         binding.feedbackSubmitBtn.setOnClickListener(v -> addFeedback());
+
+        binding.backBtn.setOnClickListener(v -> finish());
     }
 
     private void getTourist() {
@@ -132,7 +134,5 @@ public class FeedbacksActivity extends AppCompatActivity {
                     }
                 }
         );
-
-        // TODO: add deleteFeedback and updateFeedback
     }
 }

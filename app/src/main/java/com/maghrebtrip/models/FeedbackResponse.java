@@ -43,4 +43,28 @@ public class FeedbackResponse {
     public String getDate() {
         return date;
     }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setTouristFirstName(String touristFirstName) {
+        this.touristFirstName = touristFirstName;
+    }
+
+    public void setTouristLastName(String touristLastName) {
+        this.touristLastName = touristLastName;
+    }
+
+    public void setRating(float rating) {
+        this.rating = rating;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
 }

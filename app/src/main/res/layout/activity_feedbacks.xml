@@ -6,13 +6,59 @@
     android:layout_height="match_parent"
     tools:context=".activities.FeedbacksActivity">
 
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/cornel_red">
+
+            <ImageView
+                android:id="@+id/backBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:padding="8dp"
+                android:src="@drawable/arrow"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:tint="@color/white"
+                app:tint="@color/white" />
+
+            <ImageView
+                android:id="@+id/shareBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:padding="8dp"
+                android:src="@drawable/more_vert_24dp"
+                app:layout_constraintBottom_toBottomOf="@+id/backBtn"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/backBtn"
+                android:tint="@color/white"
+                app:tint="@color/white" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -35,14 +81,14 @@
 
             <RatingBar
                 android:id="@+id/feedbackRatingBar"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
                 android:numStars="5"
                 android:rating="1"
-                android:stepSize="1"
-                android:layout_gravity="center"/>
+                android:stepSize="1" />
 
             <EditText
                 android:id="@+id/feedbackComment"
@@ -56,9 +102,9 @@
                 android:id="@+id/feedbackSubmitBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
-                android:layout_gravity="center"
                 android:text="Sumbit feedback" />
 
             <TextView
@@ -72,8 +118,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="See what others said"
                 android:layout_marginBottom="16dp"
+                android:text="See what others said"
                 android:textSize="18sp" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -81,7 +127,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clipToPadding="false"
-                android:orientation="vertical"/>
+                android:orientation="vertical" />
 
         </LinearLayout>
 
