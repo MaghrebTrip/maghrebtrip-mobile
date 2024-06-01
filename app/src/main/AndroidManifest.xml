@@ -17,9 +17,11 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".activities.FeedbacksActivity"
+            android:name=".activities.ProfileActivity"
             android:exported="false" />
-        <!-- usesCleartextTraffic to bypass https -->
+        <activity
+            android:name=".activities.FeedbacksActivity"
+            android:exported="false" /> <!-- usesCleartextTraffic to bypass https -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCbvSyiejGY5dJY2s_SA-U_4Cv4ocmpq0Y" />
@@ -36,12 +38,9 @@
         <activity
             android:name=".activities.RegisterActivity"
             android:exported="true" />
-
         <activity
             android:name=".activities.main.MainActivity"
-            android:exported="true">
-        </activity>
-
+            android:exported="true"></activity>
         <activity
             android:name=".activities.details.CityDetailsActivity"
             android:exported="true" />
@@ -54,15 +53,12 @@
         <activity
             android:name=".activities.details.MonumentDetailsActivity"
             android:exported="true" />
-
         <activity
             android:name=".activities.SelectionActivity"
             android:exported="true" />
-
         <activity
             android:name=".activities.plans.PlansActivity"
             android:exported="true" />
-
         <activity
             android:name=".activities.MapsActivity"
             android:exported="true"
