@@ -89,7 +89,8 @@ public class MapsActivity extends FragmentActivity implements
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-        binding.backBtn.setOnClickListener(v -> finish());
+        View backBtn = findViewById(R.id.appBarOptionsBackBtn);
+        backBtn.setOnClickListener(v -> finish());
     }
 
     private void statusBarColor() {

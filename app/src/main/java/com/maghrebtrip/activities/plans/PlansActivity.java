@@ -1,6 +1,8 @@
 package com.maghrebtrip.activities.plans;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.widget.Toast;
 
@@ -12,6 +14,9 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 import com.maghrebtrip.R;
+import com.maghrebtrip.activities.ProfileActivity;
+import com.maghrebtrip.activities.details.RestaurantDetailsActivity;
+import com.maghrebtrip.activities.main.MainActivity;
 import com.maghrebtrip.adapters.VPAdapter;
 import com.maghrebtrip.databinding.ActivityPlansBinding;
 
@@ -28,6 +33,7 @@ public class PlansActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         statusBarColor();
+        bottomAppBar();
         getBundles();
     }
 
@@ -59,11 +65,37 @@ public class PlansActivity extends AppCompatActivity {
 
         viewPager.setAdapter(vpAdapter);
 
-        binding.backBtn.setOnClickListener(v -> finish());
+        View backBtn = findViewById(R.id.appBarOptionsBackBtn);
+        backBtn.setOnClickListener(v -> finish());
     }
 
     private void statusBarColor() {
         Window window = PlansActivity.this.getWindow();
         window.setStatusBarColor(ContextCompat.getColor(PlansActivity.this, R.color.cornel_red));
+    }
+
+    private void bottomAppBar() {
+        View bottomAppBarHomeBtn = findViewById(R.id.bottomAppBarHomeBtn);
+        View bottomAppBarExplorerBtn = findViewById(R.id.bottomAppBarExplorerBtn);
+        View bottomAppBarProfileBtn = findViewById(R.id.bottomAppBarProfileBtn);
+
+        bottomAppBarHomeBtn.setOnClickListener(
+                v -> {
+                    Intent intent = new Intent(PlansActivity.this, MainActivity.class);
+                    startActivity(intent);
+                }
+        );
+        bottomAppBarExplorerBtn.setOnClickListener(
+                v -> {
+                    Intent intent = new Intent(PlansActivity.this, MainActivity.class);
+                    startActivity(intent);
+                }
+        );
+        bottomAppBarProfileBtn.setOnClickListener(
+                v -> {
+                    Intent intent = new Intent(PlansActivity.this, ProfileActivity.class);
+                    startActivity(intent);
+                }
+        );
     }
 }

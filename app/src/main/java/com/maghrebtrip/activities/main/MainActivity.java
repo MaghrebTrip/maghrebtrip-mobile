@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,9 +17,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.auth.api.signin.internal.Storage;
 import com.google.android.material.tabs.TabLayout;
 import com.maghrebtrip.R;
+import com.maghrebtrip.activities.ProfileActivity;
 import com.maghrebtrip.adapters.VPAdapter;
 import com.maghrebtrip.databinding.ActivityMainBinding;
 import com.maghrebtrip.models.Tourist;
@@ -58,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
         userEmail = sharedPreferences.getString("email", "");
 
         statusBarColor();
+        bottomAppBar();
         getTourist();
         getBundles();
     }
@@ -65,6 +67,31 @@ public class MainActivity extends AppCompatActivity {
     private void statusBarColor() {
         Window window = MainActivity.this.getWindow();
         window.setStatusBarColor(ContextCompat.getColor(MainActivity.this, R.color.cornel_red));
+    }
+
+    private void bottomAppBar() {
+        View bottomAppBarHomeBtn = findViewById(R.id.bottomAppBarHomeBtn);
+        View bottomAppBarExplorerBtn = findViewById(R.id.bottomAppBarExplorerBtn);
+        View bottomAppBarProfileBtn = findViewById(R.id.bottomAppBarProfileBtn);
+
+        bottomAppBarHomeBtn.setOnClickListener(
+                v -> {
+                    Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                    startActivity(intent);
+                }
+        );
+        bottomAppBarExplorerBtn.setOnClickListener(
+                v -> {
+                    Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                    startActivity(intent);
+                }
+        );
+        bottomAppBarProfileBtn.setOnClickListener(
+                v -> {
+                    Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+                    startActivity(intent);
+                }
+        );
     }
 
     private void getTourist() {
@@ -87,8 +114,6 @@ public class MainActivity extends AppCompatActivity {
                             // Set the username
                             TextView textView = findViewById(R.id.userName);
                             textView.setText(String.format("Hey %s,", tourist.getFirstName()));
-
-                            Toast.makeText(MainActivity.this, String.format("Welcome %s !", tourist.getFirstName()), Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(MainActivity.this, "Empty data", Toast.LENGTH_SHORT).show();
                         }

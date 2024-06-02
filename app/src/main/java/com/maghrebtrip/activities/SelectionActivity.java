@@ -106,7 +106,8 @@ public class SelectionActivity extends AppCompatActivity {
             }
         });
 
-        binding.backBtn.setOnClickListener(v -> finish());
+        View backBtn = findViewById(R.id.appBarOptionsBackBtn);
+        backBtn.setOnClickListener(v -> finish());
     }
 
     // Method to show the number picker dialog

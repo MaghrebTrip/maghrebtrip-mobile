@@ -33,6 +33,8 @@
                 android:orientation="horizontal">
 
                 <LinearLayout
+                    android:id="@+id/bottomAppBarExplorerBtn"
+                    android:clickable="true"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
@@ -58,6 +60,8 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/bottomAppBarWishlistBtn"
+                    android:clickable="true"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
@@ -108,6 +112,8 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/bottomAppBarTripsBtn"
+                    android:clickable="true"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
@@ -133,6 +139,8 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/bottomAppBarProfileBtn"
+                    android:clickable="true"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.2"
@@ -163,12 +171,14 @@
 
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/bottomAppBarHomeBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/home_24dp"
-            app:backgroundTint="@color/cornel_red"
+            app:backgroundTint="@color/red"
             app:layout_anchor="@id/appBar"
             app:maxImageSize="30dp"
+            android:elevation="4dp"
             app:shapeAppearance="@style/RoundedCornerShape"
             app:tint="@color/white" />
 

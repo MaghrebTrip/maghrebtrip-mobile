@@ -9,7 +9,7 @@
         android:layout_width="0dp"
         android:layout_height="136dp"
         android:orientation="horizontal"
-        android:padding="16dp"
+        android:paddingHorizontal="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -60,9 +60,11 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/attractionImage"
+            android:layout_gravity="center"
             android:layout_width="104dp"
             android:layout_height="104dp"
-            app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Small"
+            android:scaleType="centerCrop"
+            app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Medium"
             android:src="@drawable/rabat" />
     </LinearLayout>
 

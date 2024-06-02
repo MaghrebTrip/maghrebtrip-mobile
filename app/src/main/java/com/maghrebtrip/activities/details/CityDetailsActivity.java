@@ -13,7 +13,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.maghrebtrip.R;
+import com.maghrebtrip.activities.ProfileActivity;
 import com.maghrebtrip.activities.SelectionActivity;
+import com.maghrebtrip.activities.main.MainActivity;
 import com.maghrebtrip.databinding.ActivityCityDetailsBinding;
 import com.maghrebtrip.models.City;
 
@@ -30,12 +32,38 @@ public class CityDetailsActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         statusBarColor();
+        bottomAppBar();
         getBundles();
     }
 
     private void statusBarColor() {
         Window window = CityDetailsActivity.this.getWindow();
         window.setStatusBarColor(ContextCompat.getColor(CityDetailsActivity.this, R.color.cornel_red));
+    }
+
+    private void bottomAppBar() {
+        View bottomAppBarHomeBtn = findViewById(R.id.bottomAppBarHomeBtn);
+        View bottomAppBarExplorerBtn = findViewById(R.id.bottomAppBarExplorerBtn);
+        View bottomAppBarProfileBtn = findViewById(R.id.bottomAppBarProfileBtn);
+
+        bottomAppBarHomeBtn.setOnClickListener(
+                v -> {
+                    Intent intent = new Intent(CityDetailsActivity.this, MainActivity.class);
+                    startActivity(intent);
+                }
+        );
+        bottomAppBarExplorerBtn.setOnClickListener(
+                v -> {
+                    Intent intent = new Intent(CityDetailsActivity.this, MainActivity.class);
+                    startActivity(intent);
+                }
+        );
+        bottomAppBarProfileBtn.setOnClickListener(
+                v -> {
+                    Intent intent = new Intent(CityDetailsActivity.this, ProfileActivity.class);
+                    startActivity(intent);
+                }
+        );
     }
 
     private void getBundles() {
@@ -53,7 +81,8 @@ public class CityDetailsActivity extends AppCompatActivity {
         binding.cityRatingDetails.setText(String.format("%s", object.getRating()));
         binding.cityDescriptionDetails.setText(object.getAbout());
 
-        binding.backBtn.setOnClickListener(v -> finish());
+        View backBtn = findViewById(R.id.appBarBookmarkBackBtn);
+        backBtn.setOnClickListener(v -> finish());
 
         binding.goBtn.setOnClickListener(new View.OnClickListener() {
             @Override

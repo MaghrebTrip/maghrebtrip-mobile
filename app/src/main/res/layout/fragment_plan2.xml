@@ -12,14 +12,15 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingBottom="120dp"
             android:orientation="vertical"
-            android:layout_margin="16dp"
             android:background="@drawable/plan_background"
             android:elevation="3dp">
 
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/plan2AttractionList"
+                android:layout_margin="8dp"
                 android:clipToPadding="false"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />

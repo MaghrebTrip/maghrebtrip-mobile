@@ -55,7 +55,8 @@ public class FeedbacksActivity extends AppCompatActivity {
 
         binding.feedbackSubmitBtn.setOnClickListener(v -> addFeedback());
 
-        binding.backBtn.setOnClickListener(v -> finish());
+        View backBtn = findViewById(R.id.appBarOptionsBackBtn);
+        backBtn.setOnClickListener(v -> finish());
     }
 
     private void getTourist() {
